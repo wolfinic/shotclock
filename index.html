@@ -28,13 +28,20 @@
     .sidebar {
       position: absolute;
       left: 0;
-      width: 120px;
+      width: 200px;
       background: rgba(0, 0, 0, 0.4);
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 1rem 0;
       backdrop-filter: blur(10px);
+    }
+
+    .sidebar h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 1rem;
     }
 
     .sidebar a {
@@ -214,26 +221,34 @@
 </head>
 <body>
   <div class="sidebar">
-    <a href="https://github.com" target="_blank">
-      <img src="/api/placeholder/60/60" alt="GitHub Profile">
-      GitHub
+    <h2>Professional Shot Clock is a free app, if you enjoy it please consider making a donation! :)</h2>
+    <a href="https://buymeacoffee.com/niccolobevacqua" target="_blank">
+      <img src="https://play-lh.googleusercontent.com/aMb_Qiolzkq8OxtQZ3Af2j8Zsp-ZZcNetR9O4xSjxH94gMA5c5gpRVbpg-3f_0L7vlo" alt="Buymeacoffee">
+      Buy me a coffee 
     </a>
-    <a href="https://twitter.com" target="_blank">
-      <img src="/api/placeholder/60/60" alt="Twitter Profile">
-      Twitter
+    <a href="#" class="sidebar-link" onclick="copyAddress('0x63abE9dc7C5800550C6e0ab5fD74dC2b7AC4b21f'); return false;">
+      <img src="https://cdnlogo.com/logos/e/81/ethereum-eth.svg" alt="Ethereum Address">
+      Ethereum Address
     </a>
-    <a href="mailto:contact@example.com">
-      <img src="/api/placeholder/60/60" alt="Contact">
-      Contact
+    
+    <script>
+    function copyAddress(address) {
+      navigator.clipboard.writeText(address);
+      alert('Ethereum address copied to clipboard: ' + address);
+    }
+    </script>
+    <a href="https://www.paypal.com/paypalme/niccolobevacqua" target="_blank">
+      <img src="https://play-lh.googleusercontent.com/xOKbvDt362x1uzW-nnggP-PgO9HM4L1vwBl5HgHFHy_n1X3mqeBtOSoIyNJzTS3rrj70" alt="Paypal">
+      Paypal
     </a>
-    <a href="/docs" target="_blank">
-      <img src="/api/placeholder/60/60" alt="Documentation">
-      Docs
+    <a href="https://web.satispay.com/download/qrcode/S6Y-CON--9D953A79-D777-4DCA-BF1A-270B1ADED68C?" target="_blank">
+      <img src="https://play-lh.googleusercontent.com/iVR66k7DgZEJzxfRzmy6py9AX34DU-1YHCHbCG_Ejk_uLqxInrQUVq7oiUDDgX6AyA" alt="Satispay">
+      Satispay
     </a>
-    <a href="/settings">
+    <!-- <a href="/settings">
       <img src="/api/placeholder/60/60" alt="Settings">
       Settings
-    </a>
+    </a> -->
   </div>
 
   <div class="app-container">
