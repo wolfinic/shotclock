@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://proshotclock.com/sitemap.xml
