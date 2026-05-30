@@ -831,6 +831,16 @@
 
     let settings = loadSettings();
 
+    // URL override (e.g. /?decimals=off — the former /pieni whole-seconds view).
+    // Applied for this visit only; not written to localStorage unless the user saves.
+    (function applyUrlParams() {
+      const p = new URLSearchParams(location.search);
+      if (p.has('decimals')) {
+        const v = p.get('decimals').toLowerCase();
+        settings.showDecimals = !(v === 'off' || v === '0' || v === 'false' || v === 'no');
+      }
+    })();
+
     // ---------- Cross-window sync (external display) ----------
     const channel = ('BroadcastChannel' in window) ? new BroadcastChannel('proshotclock') : null;
     function broadcast() {

@@ -68,8 +68,14 @@ browser).
 | Path | Description |
 | --- | --- |
 | `/` (`index.html`) | Main shot clock (operator console) + below-the-fold rules guide and FAQ |
+| `/?decimals=off` | Main clock with the final-seconds tenths turned off (whole seconds, rounded up) |
 | `/display.html` | External full-screen LED display for a second screen (`noindex`) |
-| `/pieni` (`pieni/index.html`) | "Empty / Full" display variant — shows whole seconds (rounded up) instead of tenths |
+| `/pieni` (`pieni/index.html`) | Redirect to `/?decimals=off` — kept so old links don't 404 (`noindex`) |
+
+`index.html` accepts a `decimals` query parameter (`off`/`0`/`false` to hide the
+sub-5-second tenths). It applies for that visit only and isn't saved unless the
+user saves it in Settings. `/pieni` — once a hand-maintained duplicate page — is
+now just a redirect to that view.
 
 The two pages are intentionally different in how the countdown renders and are
 kept that way; don't unify their display logic.

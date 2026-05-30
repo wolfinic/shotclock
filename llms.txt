@@ -10,7 +10,7 @@
 
 ## Pages
 - [Shot clock app and guide](https://proshotclock.com/): the interactive timer plus shot-clock rules, a league comparison table, a how-to, and an FAQ.
-- [Empty/Full 24s display](https://proshotclock.com/pieni): an alternate 24-second display variant.
+- [Whole-seconds display](https://proshotclock.com/?decimals=off): the main clock with the final-seconds tenths turned off (the former /pieni view, which now redirects here).
 
 ## About
 - Author: Niccolò Bevacqua
