@@ -51,9 +51,11 @@
       "30-second NCAA college shot clock",
       "35-second high school (NFHS) shot clock",
       "14-second and 20-second reset presets",
-      "Custom timer from 0.1 to 24 seconds",
+      "Configurable reset presets (NBA/FIBA, NCAA, high school)",
+      "Custom timer from 0.1 to 60 seconds",
+      "External full-screen display for a second monitor or projector",
       "End-of-clock buzzer / siren",
-      "Keyboard shortcuts for live use"
+      "Customizable keyboard shortcuts for live use"
     ],
     "author": {
       "@type": "Person",
@@ -385,6 +387,113 @@
       font-size: 0.9em;
     }
 
+    .toolbar {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .toolbar button {
+      background: rgba(255, 255, 255, 0.07);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .toolbar button:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
+
+    /* ---------- Settings modal ---------- */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      padding: 1rem;
+    }
+    .modal-backdrop.open { display: flex; }
+
+    .modal {
+      background: #1f1f23;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      width: min(95vw, 460px);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    .modal h2 { font-size: 1.2rem; margin-bottom: 1rem; }
+    .modal h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #888;
+      margin: 1.25rem 0 0.5rem;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.55rem;
+    }
+    .field label { font-size: 0.9rem; color: #d4d4d4; }
+    .field input[type="number"],
+    .field input[type="text"] {
+      width: 96px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      color: #fff;
+      padding: 0.4rem;
+      font-size: 0.95rem;
+    }
+    .field input[type="text"].capturing { border-color: #818cf8; color: #818cf8; }
+    .field input[type="checkbox"] { width: 18px; height: 18px; accent-color: #6366f1; }
+
+    .preset-row { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .preset-row button {
+      flex: 1;
+      min-width: 80px;
+      background: rgba(79, 70, 229, 0.25);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      padding: 0.45rem;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+    .preset-row button:hover { background: rgba(79, 70, 229, 0.45); }
+
+    .modal-hint { font-size: 0.75rem; color: #888; margin-top: 0.4rem; }
+
+    .modal-actions { display: flex; gap: 0.5rem; margin-top: 1.5rem; }
+    .modal-actions button {
+      flex: 1;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+    #settings-save { background: rgba(79, 70, 229, 0.5); color: #fff; }
+    #settings-save:hover { background: rgba(79, 70, 229, 0.7); }
+    #settings-reset, #settings-close { background: rgba(255, 255, 255, 0.1); color: #cbd5e1; }
+    #settings-reset:hover, #settings-close:hover { background: rgba(255, 255, 255, 0.2); }
+
     .scroll-cue {
       margin-top: 1.5rem;
       color: #888;
@@ -524,16 +633,22 @@
       </div>
 
       <div class="custom-time">
-        <input type="number" id="custom-time" placeholder="Enter custom time (0.1-24.0)" step="0.1" min="0.1" max="24.0">
+        <input type="number" id="custom-time" placeholder="Enter custom time (0.1-60.0)" step="0.1" min="0.1" max="60.0">
         <button id="set-custom">Set Time</button>
       </div>
 
       <div class="shortcuts">
         Shortcuts:
         <kbd>Space</kbd> Start/Stop &bull;
-        <kbd>&larr;</kbd> Reset to 14 &bull;
-        <kbd>&rarr;</kbd> Reset to 24 &bull;
+        <kbd>&rarr;</kbd> Reset 1 &bull;
+        <kbd>&larr;</kbd> Reset 2 &bull;
         <kbd>&uarr;</kbd> Blank Display
+      </div>
+
+      <div class="toolbar">
+        <button id="open-display" title="Open the full-screen display in a new window">🖥 Open display</button>
+        <button id="recall" title="Undo the last reset">↩ Recall</button>
+        <button id="open-settings" title="Presets, shortcuts and display options">⚙ Settings</button>
       </div>
     </div>
 
@@ -575,8 +690,10 @@
     <h2>How to use this shot clock</h2>
     <ul>
       <li><strong>Start / stop</strong> the clock with the button or the <kbd>Space</kbd> bar.</li>
-      <li><strong>Reset to 24 or 14 seconds</strong> with the buttons, or the <kbd>&rarr;</kbd> and <kbd>&larr;</kbd> keys.</li>
-      <li><strong>Set a custom time</strong> (0.1–24 seconds) for specialised drills, such as a 5-second decision rule.</li>
+      <li><strong>Reset</strong> to either preset with the two reset buttons, or the <kbd>&rarr;</kbd> and <kbd>&larr;</kbd> keys.</li>
+      <li><strong>Choose your presets</strong> in Settings — NBA/FIBA (24 / 14), NCAA (30 / 20) or high school (35) — and remap the keyboard shortcuts. Your choices are saved in the browser.</li>
+      <li><strong>Set a custom time</strong> (0.1–60 seconds) for specialised drills, such as a 5-second decision rule.</li>
+      <li><strong>Open the external display</strong> to mirror the clock full-screen on a second monitor or projector at the scorer's table — it stays in sync automatically.</li>
       <li>Under 5 seconds the display switches to <strong>tenths of a second</strong> and turns red for the final stretch.</li>
       <li>When the clock hits zero, the <strong>buzzer</strong> sounds — just like the real end-of-possession horn.</li>
       <li>Use the <kbd>&uarr;</kbd> key to <strong>blank the display</strong> between possessions.</li>
@@ -633,26 +750,111 @@
     </footer>
   </main>
 
-  <script>
-    // Full previous JavaScript implementation
-    const shotClockElement = document.getElementById('shot-clock');
-    const startStopButton = document.getElementById('start-stop');
-    const reset24Button = document.getElementById('reset-24');
-    const reset14Button = document.getElementById('reset-14');
-    const customTimeInput = document.getElementById('custom-time');
-    const setCustomButton = document.getElementById('set-custom');
-    const sirenSound = document.getElementById('siren-sound');
-    const statusElement = document.getElementById('status');
-    const sidebar = document.getElementById('sidebar');
-    const sidebarToggle = document.getElementById('sidebar-toggle');
+  <!-- Settings modal -->
+  <div class="modal-backdrop" id="settings-modal">
+    <div class="modal">
+      <h2>Settings</h2>
 
+      <h3>Reset presets</h3>
+      <div class="field">
+        <label for="time1-input">Reset 1 (seconds)</label>
+        <input type="number" id="time1-input" min="1" max="60" step="1">
+      </div>
+      <div class="field">
+        <label for="time2-input">Reset 2 (seconds)</label>
+        <input type="number" id="time2-input" min="1" max="60" step="1">
+      </div>
+      <div class="preset-row">
+        <button data-p1="24" data-p2="14">NBA / FIBA · 24 / 14</button>
+        <button data-p1="30" data-p2="20">NCAA · 30 / 20</button>
+        <button data-p1="35" data-p2="35">High school · 35</button>
+      </div>
+
+      <h3>Display</h3>
+      <div class="field">
+        <label for="decimals-input">Show tenths under 5s</label>
+        <input type="checkbox" id="decimals-input">
+      </div>
+      <div class="field">
+        <label for="blankfull-input">Blank display at full (FIBA)</label>
+        <input type="checkbox" id="blankfull-input">
+      </div>
+      <div class="field">
+        <label for="muteconsole-input">Mute this page's buzzer</label>
+        <input type="checkbox" id="muteconsole-input">
+      </div>
+
+      <h3>Keyboard shortcuts</h3>
+      <div class="field"><label>Start / Stop</label><input type="text" id="key-startstop" readonly></div>
+      <div class="field"><label>Reset 1</label><input type="text" id="key-reset1" readonly></div>
+      <div class="field"><label>Reset 2</label><input type="text" id="key-reset2" readonly></div>
+      <div class="field"><label>Blank display</label><input type="text" id="key-blank" readonly></div>
+      <p class="modal-hint">Click a shortcut field, then press the key you want to assign.</p>
+
+      <div class="modal-actions">
+        <button id="settings-reset">Defaults</button>
+        <button id="settings-close">Cancel</button>
+        <button id="settings-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const shotClockElement = document.getElementById('shot-clock');
+    const startStopButton  = document.getElementById('start-stop');
+    const reset24Button    = document.getElementById('reset-24');
+    const reset14Button    = document.getElementById('reset-14');
+    const customTimeInput  = document.getElementById('custom-time');
+    const setCustomButton  = document.getElementById('set-custom');
+    const sirenSound       = document.getElementById('siren-sound');
+    const statusElement    = document.getElementById('status');
+    const sidebar          = document.getElementById('sidebar');
+    const sidebarToggle    = document.getElementById('sidebar-toggle');
+
+    // ---------- Settings (persisted) ----------
+    const DEFAULT_SETTINGS = {
+      time1: 24, time2: 14,
+      showDecimals: true, blankAtFull: false, muteConsole: false,
+      keys: { startStop: 'Space', reset1: 'ArrowRight', reset2: 'ArrowLeft', blank: 'ArrowUp' }
+    };
+
+    function loadSettings() {
+      try {
+        const s = JSON.parse(localStorage.getItem('proshotclock:settings') || 'null');
+        if (s) return { ...DEFAULT_SETTINGS, ...s, keys: { ...DEFAULT_SETTINGS.keys, ...(s.keys || {}) } };
+      } catch (e) { /* ignore */ }
+      return JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+    }
+    function saveSettings() {
+      try { localStorage.setItem('proshotclock:settings', JSON.stringify(settings)); } catch (e) {}
+    }
+
+    let settings = loadSettings();
+
+    // ---------- Cross-window sync (external display) ----------
+    const channel = ('BroadcastChannel' in window) ? new BroadcastChannel('proshotclock') : null;
+    function broadcast() {
+      const payload = {
+        time: shotClockValue,
+        running: isRunning,
+        blank: isDisplayBlank,
+        settings: {
+          time1: settings.time1, time2: settings.time2,
+          showDecimals: settings.showDecimals, blankAtFull: settings.blankAtFull
+        }
+      };
+      try { localStorage.setItem('proshotclock:state', JSON.stringify(payload)); } catch (e) {}
+      if (channel) channel.postMessage(payload);
+    }
+
+    // ---------- Clock state ----------
     let shotClockInterval;
-    let shotClockValue = 24.0;
+    let shotClockValue = settings.time1;
     let isRunning = false;
     let hasPlayedSiren = false;
     let isDisplayBlank = false;
-    let lastResetValue = 24.0;
-
+    let lastResetValue = settings.time1;
+    let previousValue = settings.time1;   // for Recall
 
     function updateStatus() {
       statusElement.textContent = isRunning ? 'Running' : 'Stopped';
@@ -660,42 +862,37 @@
 
     function updateClockDisplay() {
       shotClockElement.classList.remove('running', 'warning', 'danger');
-
       if (!isDisplayBlank && isRunning) {
-        if (shotClockValue <= 5) {
-          shotClockElement.classList.add('danger');
-        } else if (shotClockValue <= 10) {
-          shotClockElement.classList.add('warning');
-        } else {
-          shotClockElement.classList.add('running');
-        }
+        if (shotClockValue <= 5) shotClockElement.classList.add('danger');
+        else if (shotClockValue <= 10) shotClockElement.classList.add('warning');
+        else shotClockElement.classList.add('running');
       }
     }
 
-    function updateShotClock() {
-      if (isDisplayBlank) {
-        shotClockElement.textContent = "";
-      } else if (shotClockValue <= 5) {
-        shotClockElement.textContent = shotClockValue.toFixed(1);
-      } else {
-        shotClockElement.textContent = Math.floor(shotClockValue);
-      }
+    function renderClockText() {
+      if (isDisplayBlank) { shotClockElement.textContent = ''; return; }
+      const t = Math.max(0, shotClockValue);
+      if (settings.showDecimals && t <= 5) shotClockElement.textContent = t.toFixed(1);
+      else if (settings.showDecimals) shotClockElement.textContent = Math.floor(t);
+      else shotClockElement.textContent = Math.ceil(t);
+    }
 
+    function updateShotClock() {
+      renderClockText();
       if (shotClockValue <= 0) {
         shotClockValue = 0;
-        if (!isDisplayBlank) {
-          shotClockElement.textContent = "0.0";
-        }
+        if (!isDisplayBlank) shotClockElement.textContent = settings.showDecimals ? '0.0' : '0';
         if (!hasPlayedSiren) {
-          playSirenSound();
+          if (!settings.muteConsole) playSirenSound();
           hasPlayedSiren = true;
           stopShotClock();
         }
       } else {
-        shotClockValue -= 0.1;
+        shotClockValue = Math.round((shotClockValue - 0.1) * 10) / 10;
         hasPlayedSiren = false;
       }
       updateClockDisplay();
+      broadcast();
     }
 
     function playSirenSound() {
@@ -704,12 +901,13 @@
     }
 
     function startShotClock() {
-      if (!isRunning) {
+      if (!isRunning && shotClockValue > 0) {
         isRunning = true;
         isDisplayBlank = false;
         shotClockInterval = setInterval(updateShotClock, 100);
         updateStatus();
         updateClockDisplay();
+        broadcast();
       }
     }
 
@@ -718,91 +916,185 @@
       clearInterval(shotClockInterval);
       updateStatus();
       updateClockDisplay();
+      broadcast();
     }
 
-    function resetShotClock(value = 24.0) {
+    function resetShotClock(value) {
       const wasRunning = isRunning;
       stopShotClock();
+      previousValue = lastResetValue;
       shotClockValue = value;
       lastResetValue = value;
       hasPlayedSiren = false;
       isDisplayBlank = false;
-      updateShotClock();
-      if (wasRunning) {
-        startShotClock();
-      }
+      renderClockText();
+      updateClockDisplay();
+      broadcast();
+      if (wasRunning) startShotClock();
+    }
+
+    function recallPrevious() {
+      resetShotClock(previousValue);
     }
 
     function setCustomTime() {
-      let customValue = parseFloat(customTimeInput.value);
-      if (!isNaN(customValue)) {
-        customValue = Math.min(24, Math.max(0.1, customValue));
-        customValue = Math.round(customValue * 10) / 10;
-        resetShotClock(customValue);
+      let v = parseFloat(customTimeInput.value);
+      if (!isNaN(v)) {
+        v = Math.min(60, Math.max(0.1, v));
+        v = Math.round(v * 10) / 10;
+        resetShotClock(v);
         customTimeInput.value = '';
         customTimeInput.blur();
       }
     }
 
     function toggleDisplay() {
-      if (!isRunning && lastResetValue === 24.0) {
-        if (isDisplayBlank) {
-          // If toggling back, restore the last value
-          isDisplayBlank = false;
-          shotClockValue = lastResetValue; // Reset value to the last known reset value
-        } else {
-          // Blank the display and stop updates
-          isDisplayBlank = true;
-        }
-        updateShotClock();
+      if (!isRunning && lastResetValue === settings.time1) {
+        isDisplayBlank = !isDisplayBlank;
+        if (!isDisplayBlank) shotClockValue = lastResetValue;
+        renderClockText();
+        updateClockDisplay();
+        broadcast();
       }
     }
 
-    startStopButton.addEventListener('click', () => {
-      if (isRunning) {
-        stopShotClock();
-      } else {
-        startShotClock();
-      }
-    });
+    function applySettingsToUI() {
+      reset24Button.textContent = 'Reset to ' + settings.time1;
+      reset14Button.textContent = 'Reset to ' + settings.time2;
+    }
 
-    reset24Button.addEventListener('click', () => {
-      resetShotClock(24.0);
-    });
-
-    reset14Button.addEventListener('click', () => {
-      resetShotClock(14.0);
-    });
-
+    // ---------- Controls ----------
+    startStopButton.addEventListener('click', () => { isRunning ? stopShotClock() : startShotClock(); });
+    reset24Button.addEventListener('click', () => resetShotClock(settings.time1));
+    reset14Button.addEventListener('click', () => resetShotClock(settings.time2));
     setCustomButton.addEventListener('click', setCustomTime);
+    customTimeInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') setCustomTime(); });
 
-    customTimeInput.addEventListener('keypress', (event) => {
-      if (event.key === 'Enter') {
-        setCustomTime();
-      }
+    document.getElementById('open-display').addEventListener('click', () => {
+      broadcast();
+      window.open('display.html', 'ProShotClockDisplay', 'width=960,height=600');
     });
+    document.getElementById('recall').addEventListener('click', recallPrevious);
 
     document.addEventListener('keydown', (event) => {
-      if (event.code === 'Space') {
-        event.preventDefault();
-        startStopButton.click();
-      } else if (event.code === 'ArrowRight') {
-        reset24Button.click();
-      } else if (event.code === 'ArrowLeft') {
-        reset14Button.click();
-      } else if (event.code === 'ArrowUp') {
-        toggleDisplay();
-      } else if (event.code === 'Enter' && document.activeElement !== customTimeInput) {
-        event.preventDefault();
-        customTimeInput.focus();
+      if (settingsModal.classList.contains('open')) return;
+      if (document.activeElement === customTimeInput) {
+        if (event.key === 'Enter') setCustomTime();
+        return;
       }
+      const code = event.code;
+      if (code === settings.keys.startStop) { event.preventDefault(); startStopButton.click(); }
+      else if (code === settings.keys.reset1) { event.preventDefault(); resetShotClock(settings.time1); }
+      else if (code === settings.keys.reset2) { event.preventDefault(); resetShotClock(settings.time2); }
+      else if (code === settings.keys.blank)  { event.preventDefault(); toggleDisplay(); }
+      else if (code === 'Enter') { event.preventDefault(); customTimeInput.focus(); }
     });
 
+    function setSidebarCollapsed(collapsed) {
+      sidebar.classList.toggle('collapsed', collapsed);
+      sidebarToggle.innerHTML = collapsed ? '&#9654;' : '&#9664;';
+      sidebarToggle.setAttribute('aria-label', collapsed ? 'Open donation menu' : 'Close donation menu');
+      try { localStorage.setItem('proshotclock:sidebar', collapsed ? '1' : '0'); } catch (e) {}
+    }
     sidebarToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('collapsed');
+      setSidebarCollapsed(!sidebar.classList.contains('collapsed'));
+    });
+    // Restore the saved open/closed state
+    try {
+      if (localStorage.getItem('proshotclock:sidebar') === '1') setSidebarCollapsed(true);
+    } catch (e) {}
 
-      sidebarToggle.innerHTML = sidebar.classList.contains('collapsed') ? '&#9654;' : '&#9664;';
-    })
+    // ---------- Settings modal ----------
+    const settingsModal = document.getElementById('settings-modal');
+    const els = {
+      time1: document.getElementById('time1-input'),
+      time2: document.getElementById('time2-input'),
+      decimals: document.getElementById('decimals-input'),
+      blankFull: document.getElementById('blankfull-input'),
+      mute: document.getElementById('muteconsole-input'),
+      keyStartStop: document.getElementById('key-startstop'),
+      keyReset1: document.getElementById('key-reset1'),
+      keyReset2: document.getElementById('key-reset2'),
+      keyBlank: document.getElementById('key-blank')
+    };
+    const KEY_LABELS = { Space: 'Space', ArrowRight: '→', ArrowLeft: '←', ArrowUp: '↑', ArrowDown: '↓' };
+    function keyLabel(code) { return KEY_LABELS[code] || code.replace('Key', '').replace('Digit', ''); }
+
+    let draft = null;
+    function syncModal() {
+      els.time1.value = draft.time1;
+      els.time2.value = draft.time2;
+      els.decimals.checked = draft.showDecimals;
+      els.blankFull.checked = draft.blankAtFull;
+      els.mute.checked = draft.muteConsole;
+      els.keyStartStop.value = keyLabel(draft.keys.startStop);
+      els.keyReset1.value = keyLabel(draft.keys.reset1);
+      els.keyReset2.value = keyLabel(draft.keys.reset2);
+      els.keyBlank.value = keyLabel(draft.keys.blank);
+    }
+    function openSettings() {
+      draft = JSON.parse(JSON.stringify(settings));
+      syncModal();
+      settingsModal.classList.add('open');
+    }
+    function closeSettings() { settingsModal.classList.remove('open'); }
+
+    document.getElementById('open-settings').addEventListener('click', openSettings);
+    document.getElementById('settings-close').addEventListener('click', closeSettings);
+    settingsModal.addEventListener('click', (e) => { if (e.target === settingsModal) closeSettings(); });
+
+    document.getElementById('settings-reset').addEventListener('click', () => {
+      draft = JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+      syncModal();
+    });
+
+    document.querySelectorAll('.preset-row button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        draft.time1 = parseInt(btn.dataset.p1, 10);
+        draft.time2 = parseInt(btn.dataset.p2, 10);
+        syncModal();
+      });
+    });
+
+    [[els.keyStartStop, 'startStop'], [els.keyReset1, 'reset1'], [els.keyReset2, 'reset2'], [els.keyBlank, 'blank']]
+      .forEach(([input, prop]) => {
+        input.addEventListener('focus', () => input.classList.add('capturing'));
+        input.addEventListener('blur', () => input.classList.remove('capturing'));
+        input.addEventListener('keydown', (e) => {
+          e.preventDefault();
+          draft.keys[prop] = e.code;
+          input.value = keyLabel(e.code);
+          input.blur();
+        });
+      });
+
+    function clampInt(v, min, max, dflt) {
+      let n = parseInt(v, 10);
+      if (isNaN(n)) n = dflt;
+      return Math.min(max, Math.max(min, n));
+    }
+
+    document.getElementById('settings-save').addEventListener('click', () => {
+      draft.time1 = clampInt(els.time1.value, 1, 60, DEFAULT_SETTINGS.time1);
+      draft.time2 = clampInt(els.time2.value, 1, 60, DEFAULT_SETTINGS.time2);
+      draft.showDecimals = els.decimals.checked;
+      draft.blankAtFull = els.blankFull.checked;
+      draft.muteConsole = els.mute.checked;
+      settings = draft;
+      saveSettings();
+      applySettingsToUI();
+      if (!isRunning) renderClockText();
+      updateClockDisplay();
+      broadcast();
+      closeSettings();
+    });
+
+    // ---------- Init ----------
+    applySettingsToUI();
+    renderClockText();
+    updateStatus();
+    updateClockDisplay();
+    broadcast();
 
   </script>
 </body>
