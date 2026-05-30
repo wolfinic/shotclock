@@ -177,23 +177,28 @@
     }
 
     .sidebar-toggle {
-      position: absolute;
-      left: 100%;
+      position: fixed;
+      left: 200px;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(79, 70, 229, 0.65);
       color: #fff;
       border: none;
-      padding: 10px;
+      padding: 16px 9px;
       cursor: pointer;
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
-      transition: background 0.3s ease;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+      box-shadow: 2px 0 12px rgba(0, 0, 0, 0.4);
+      transition: left 0.3s ease, background 0.3s ease;
+      z-index: 20;
+      font-size: 1rem;
+      line-height: 1;
     }
 
-    .sidebar-toggle:hover {
-      background: rgba(0, 0, 0, 0.6);
-    }
+    .sidebar-toggle:hover { background: rgba(79, 70, 229, 0.9); }
+
+    /* Toggle rides the sidebar's right edge; snaps to the screen edge when closed */
+    .sidebar.collapsed ~ .sidebar-toggle { left: 0; }
 
     .sidebar h2 {
       font-size: 1rem;
@@ -561,9 +566,6 @@
 </head>
 <body>
   <div class="sidebar" id="sidebar">
-    <button class="sidebar-toggle" id="sidebar-toggle">
-      &#9664; <!-- Left arrow character -->
-    </button>
     <div style="height: 20px;"></div>
     <h2 style="padding: 5px;">Professional Shot Clock is a free app, if you enjoy it please consider making a donation! :)</h2>
     <div style="height: 20px;"></div>
@@ -585,10 +587,6 @@
     <a href="https://www.paypal.com/paypalme/niccolobevacqua" target="_blank">
       <img src="https://play-lh.googleusercontent.com/xOKbvDt362x1uzW-nnggP-PgO9HM4L1vwBl5HgHFHy_n1X3mqeBtOSoIyNJzTS3rrj70" alt="Paypal">
       Paypal
-    </a>
-    <a href="https://web.satispay.com/download/qrcode/S6Y-CON--9D953A79-D777-4DCA-BF1A-270B1ADED68C?" target="_blank">
-      <img src="https://play-lh.googleusercontent.com/iVR66k7DgZEJzxfRzmy6py9AX34DU-1YHCHbCG_Ejk_uLqxInrQUVq7oiUDDgX6AyA" alt="Satispay">
-      Satispay
     </a>
     <a href="mailto:niccolo.bevacqua@gmail.com">
       <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email Icon">
@@ -615,6 +613,8 @@
 
 
   </div>
+
+  <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Close donation menu">&#9664;</button>
 
   <!-- THE CLOCK: first thing the visitor sees -->
   <header class="hero">
