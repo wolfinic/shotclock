@@ -1,11 +1,12 @@
 # ProShotClock
 
-> ProShotClock is a free online basketball shot clock that runs in any web browser. It supports the 24-second NBA/WNBA/FIBA clock, the 30-second NCAA college clock, and the 35-second U.S. high school (NFHS) clock, plus 14- and 20-second resets, custom timers, an end-of-clock buzzer, customizable keyboard shortcuts, and an external full-screen display for a second monitor or projector. No download or sign-up required.
+> ProShotClock is a free online basketball shot clock that runs in any web browser. It supports the 24-second NBA/WNBA/FIBA clock, the 30-second NCAA college clock, the 35-second U.S. high school (NFHS) clock, and the 12-second FIBA 3x3 (3v3) clock, plus 14- and 20-second resets, custom timers, an end-of-clock buzzer, customizable keyboard shortcuts, and an external full-screen display for a second monitor or projector. No download or sign-up required.
 
 ## Key facts about basketball shot clocks
 - NBA, WNBA and FIBA: 24-second shot clock; resets to 14 seconds after an offensive rebound (or certain defensive fouls/violations) when the offense keeps possession in the frontcourt.
 - NCAA men's and women's college basketball: 30-second shot clock; resets to 20 seconds after an offensive rebound in the frontcourt (since 2018-19 for men, 2017-18 for women).
 - U.S. high school (NFHS): optional 35-second shot clock that each state association may adopt, beginning with the 2022-23 season; adoption varies by state.
+- FIBA 3x3 (3v3, half-court, Olympic since Tokyo 2020): 12-second shot clock — half of the 24-second 5-on-5 clock; there is no separate partial reset (no 14-second equivalent), a new possession simply gets a fresh 12 seconds.
 - A shot clock limits how long the offense may hold the ball before a shot hits the rim; expiry is a shot-clock violation. The NBA introduced it in 1954.
 
 ## Pages

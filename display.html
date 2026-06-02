@@ -96,6 +96,32 @@
       pointer-events: none;
     }
     .display:hover .hint { opacity: 1; }
+
+    .sponsor-strip {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 1.4vh;
+      padding: 1.3vh;
+      background: rgba(0, 0, 0, 0.55);
+      color: #bbb;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 2.4vh;
+      text-decoration: none;
+      z-index: 5;
+    }
+    .sponsor-strip.visible { display: flex; }
+    .sponsor-strip img { height: 4.6vh; width: auto; }
+    .sponsor-strip-label {
+      color: #777;
+      font-size: 1.7vh;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
   </style>
 </head>
 <body>
@@ -103,6 +129,12 @@
     <div class="stop-lamp" id="stop-lamp"></div>
     <div class="digits" id="digits">24</div>
     <div class="blank-dot" id="blank-dot"></div>
+
+    <a class="sponsor-strip" id="sponsor-strip" href="#" target="_blank" rel="noopener sponsored">
+      <span class="sponsor-strip-label">Sponsored by</span>
+      <img id="sponsor-strip-img" src="" alt="">
+      <span id="sponsor-strip-name"></span>
+    </a>
 
     <div class="audio-overlay" id="audio-overlay">
       <div>
@@ -219,6 +251,22 @@
         try { apply(JSON.parse(ev.newValue)); } catch (e) {}
       }
     });
+
+    // ---- Sponsor strip (from sponsor.json; needs network, so absent when offline) ----
+    fetch('sponsor.json', { cache: 'no-store' })
+      .then(r => r.ok ? r.json() : null)
+      .then(s => {
+        if (!s || !s.active || !s.linkUrl) return;
+        const strip = document.getElementById('sponsor-strip');
+        const img   = document.getElementById('sponsor-strip-img');
+        const name  = document.getElementById('sponsor-strip-name');
+        strip.href = s.linkUrl;
+        if (s.imageUrl) { img.src = s.imageUrl; img.alt = (s.name || 'Sponsor') + ' logo'; }
+        else { img.hidden = true; }
+        name.textContent = s.name || '';
+        strip.classList.add('visible');
+      })
+      .catch(() => { /* no sponsor / offline */ });
 
     render();
   </script>

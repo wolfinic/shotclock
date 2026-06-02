@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Basketball Shot Clock — 24s, 30s & 35s Timer | ProShotClock</title>
-  <meta name="description" content="Free online basketball shot clock with a 24-second NBA/FIBA timer, 30-second NCAA timer, and 35-second high school timer. 14s/20s resets, buzzer, custom times, and keyboard shortcuts for practice and games.">
+  <title>Online Basketball Shot Clock — 24s, 30s, 35s & 12s (3x3) Timer | ProShotClock</title>
+  <meta name="description" content="Free online basketball shot clock with a 24-second NBA/FIBA timer, 30-second NCAA timer, 35-second high school timer, and 12-second FIBA 3x3 (3v3) timer. 14s/20s resets, buzzer, custom times, and keyboard shortcuts for practice and games.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="author" content="Niccolò Bevacqua">
   <meta name="theme-color" content="#1a1a1a">
@@ -12,8 +12,8 @@
 
   <!-- Open Graph -->
   <meta property="og:site_name" content="ProShotClock">
-  <meta property="og:title" content="Online Basketball Shot Clock — 24s, 30s & 35s Timer">
-  <meta property="og:description" content="Free basketball shot clock for practice and games. NBA/FIBA 24s, NCAA 30s, and high school 35s timers with resets, buzzer, custom times, and keyboard shortcuts.">
+  <meta property="og:title" content="Online Basketball Shot Clock — 24s, 30s, 35s & 12s (3x3) Timer">
+  <meta property="og:description" content="Free basketball shot clock for practice and games. NBA/FIBA 24s, NCAA 30s, high school 35s, and FIBA 3x3 12s timers with resets, buzzer, custom times, and keyboard shortcuts.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://i.ibb.co/RHPDGYy/24-2-1.png">
   <meta property="og:url" content="https://proshotclock.com/">
@@ -21,7 +21,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Online Basketball Shot Clock — ProShotClock">
-  <meta name="twitter:description" content="Free basketball shot clock: NBA/FIBA 24s, NCAA 30s, high school 35s. Resets, buzzer, custom times, keyboard shortcuts.">
+  <meta name="twitter:description" content="Free basketball shot clock: NBA/FIBA 24s, NCAA 30s, high school 35s, FIBA 3x3 12s. Resets, buzzer, custom times, keyboard shortcuts.">
   <meta name="twitter:image" content="https://i.ibb.co/RHPDGYy/24-2-1.png">
 
   <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/RHPDGYy/24-2-1.png">
@@ -35,7 +35,7 @@
     "@type": "WebApplication",
     "name": "ProShotClock",
     "url": "https://proshotclock.com/",
-    "description": "Free online basketball shot clock supporting NBA/FIBA 24-second, NCAA 30-second, and high school 35-second timers, with 14s/20s resets, custom times, keyboard shortcuts, and an end-of-clock buzzer.",
+    "description": "Free online basketball shot clock supporting NBA/FIBA 24-second, NCAA 30-second, high school 35-second, and FIBA 3x3 12-second timers, with 14s/20s resets, custom times, keyboard shortcuts, and an end-of-clock buzzer.",
     "applicationCategory": "SportsApplication",
     "operatingSystem": "Any (web browser)",
     "browserRequirements": "Requires JavaScript",
@@ -50,6 +50,7 @@
       "24-second NBA, WNBA and FIBA shot clock",
       "30-second NCAA college shot clock",
       "35-second high school (NFHS) shot clock",
+      "12-second FIBA 3x3 (3v3) shot clock",
       "14-second and 20-second reset presets",
       "Configurable reset presets (NBA/FIBA, NCAA, high school)",
       "Custom timer from 0.1 to 60 seconds",
@@ -100,6 +101,14 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "It varies by state. Beginning with the 2022-23 season the NFHS allows individual state associations to adopt a 35-second shot clock. A growing number of states use it, while others still play without one."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long is the shot clock in 3x3 (3v3) basketball?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FIBA 3x3 basketball uses a 12-second shot clock, exactly half of the 24-second clock in the 5-on-5 game. The faster clock suits 3x3's half-court, single-basket format. Unlike 5x5 there is no separate partial reset such as the 14-second reset; a team simply gets a fresh 12 seconds when it gains a new possession."
         }
       },
       {
@@ -562,6 +571,66 @@
       color: #888;
       text-align: center;
     }
+
+    /* ---------- Sponsor banner ---------- */
+    .sponsor-bar { max-width: 820px; margin: 0 auto 2rem; }
+    .sponsor-cta {
+      display: block;
+      text-align: center;
+      padding: 0.75rem 1rem;
+      border: 1px dashed rgba(129, 140, 248, 0.45);
+      border-radius: 10px;
+      color: #a5b4fc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s ease;
+    }
+    .sponsor-cta:hover { background: rgba(129, 140, 248, 0.08); }
+    .sponsor-active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      padding: 0.75rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      text-decoration: none;
+      color: #d4d4d4;
+    }
+    .sponsor-active img { height: 36px; width: auto; border-radius: 6px; }
+    .sponsor-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #777;
+    }
+
+    /* ---------- Affiliate gear ---------- */
+    .gear-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0 0.5rem;
+    }
+    .gear-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 0.9rem 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.2s ease;
+    }
+    .gear-card:hover { background: rgba(255, 255, 255, 0.08); transform: translateY(-2px); }
+    .gear-card strong { font-size: 0.95rem; }
+    .gear-card span { font-size: 0.8rem; color: #9ca3af; }
+    .affiliate-note { font-size: 0.75rem; color: #777; margin-top: 0.5rem; }
+
+    /* ---------- Ad slot (dormant until IDs added) ---------- */
+    .ad-slot { max-width: 820px; margin: 2rem auto; min-height: 1px; text-align: center; }
   </style>
 </head>
 <body>
@@ -659,6 +728,18 @@
 
   <!-- SEO / AI content, below the fold -->
   <main class="content" id="guide">
+    <!-- Sponsor banner: filled from sponsor.json; falls back to the "advertise" CTA -->
+    <aside class="sponsor-bar" id="sponsor-bar" aria-label="Sponsor">
+      <a class="sponsor-cta" id="sponsor-empty" href="mailto:niccolo.bevacqua@digitalforest.it?subject=Sponsor%20ProShotClock">
+        📣 Your brand on every shot clock — <strong>advertise on ProShotClock</strong> →
+      </a>
+      <a class="sponsor-active" id="sponsor-active" href="#" target="_blank" rel="noopener sponsored" hidden>
+        <span class="sponsor-label">Sponsored by</span>
+        <img id="sponsor-img" src="" alt="" hidden>
+        <span id="sponsor-name"></span>
+      </a>
+    </aside>
+
     <h2>The free online basketball shot clock for practice and games</h2>
     <p>
       ProShotClock is a free, full-screen <strong>basketball shot clock</strong> you can run in any web browser —
@@ -684,6 +765,7 @@
         <tr><td>FIBA (international)</td><td>24 seconds</td><td>14 seconds</td></tr>
         <tr><td>NCAA — men's &amp; women's</td><td>30 seconds</td><td>20 seconds</td></tr>
         <tr><td>U.S. high school (NFHS)</td><td>35 seconds (state option)</td><td>No standard partial reset</td></tr>
+        <tr><td>FIBA 3x3 (3v3, half-court)</td><td>12 seconds</td><td>No partial reset — fresh 12s on a new possession</td></tr>
       </tbody>
     </table>
 
@@ -691,7 +773,7 @@
     <ul>
       <li><strong>Start / stop</strong> the clock with the button or the <kbd>Space</kbd> bar.</li>
       <li><strong>Reset</strong> to either preset with the two reset buttons, or the <kbd>&rarr;</kbd> and <kbd>&larr;</kbd> keys.</li>
-      <li><strong>Choose your presets</strong> in Settings — NBA/FIBA (24 / 14), NCAA (30 / 20) or high school (35) — and remap the keyboard shortcuts. Your choices are saved in the browser.</li>
+      <li><strong>Choose your presets</strong> in Settings — NBA/FIBA (24 / 14), NCAA (30 / 20), high school (35) or FIBA 3x3 (12) — and remap the keyboard shortcuts. Your choices are saved in the browser.</li>
       <li><strong>Set a custom time</strong> (0.1–60 seconds) for specialised drills, such as a 5-second decision rule.</li>
       <li><strong>Open the external display</strong> to mirror the clock full-screen on a second monitor or projector at the scorer's table — it stays in sync automatically.</li>
       <li>Under 5 seconds the display switches to <strong>tenths of a second</strong> and turns red for the final stretch.</li>
@@ -706,6 +788,45 @@
       violation and the ball is awarded to the defence. The rule was introduced in the NBA in 1954 to speed up
       play and prevent teams from stalling, and it is now used at virtually every level of organised basketball.
     </p>
+
+    <h2>The 3x3 (3v3) basketball shot clock</h2>
+    <p>
+      <strong>FIBA 3x3</strong> — the half-court, three-a-side game that became an Olympic sport at Tokyo 2020 —
+      runs on a <strong>12-second shot clock</strong>, exactly half of the 24 seconds used in the 5-on-5 game.
+      The shorter clock keeps 3x3 relentless: teams play to 21 points or the highest score after 10 minutes,
+      scoring one point from inside the arc and two from beyond it, with three players a side plus one substitute.
+    </p>
+    <p>
+      After a change of possession a team must clear the ball behind the two-point arc before it can score, and the
+      12-second clock starts when the team gains control. Unlike 5-on-5 there is no separate partial reset (no
+      14-second equivalent) — a new possession simply gets a fresh 12 seconds. To run a 3x3 clock here, open
+      <strong>Settings</strong> and pick the <strong>FIBA 3x3 · 12</strong> preset, or just type 12 as a custom time.
+    </p>
+
+    <h2>Recommended shot-clock gear</h2>
+    <p>Taking it off the screen and into the gym? These are the pieces worth owning for real games and practices.</p>
+    <div class="gear-grid">
+      <a class="gear-card" href="https://www.amazon.com/s?k=basketball+shot+clock&amp;tag=AMAZON_TAG-20" target="_blank" rel="noopener sponsored">
+        <strong>Portable shot clocks</strong>
+        <span>Standalone 24s units for the gym wall</span>
+      </a>
+      <a class="gear-card" href="https://www.amazon.com/s?k=portable+basketball+scoreboard&amp;tag=AMAZON_TAG-20" target="_blank" rel="noopener sponsored">
+        <strong>Portable scoreboards</strong>
+        <span>Score, period and game clock combos</span>
+      </a>
+      <a class="gear-card" href="https://www.amazon.com/s?k=referee+whistle&amp;tag=AMAZON_TAG-20" target="_blank" rel="noopener sponsored">
+        <strong>Referee whistles</strong>
+        <span>Loud, pealess whistles for officials</span>
+      </a>
+      <a class="gear-card" href="https://www.amazon.com/s?k=basketball+ball+rack&amp;tag=AMAZON_TAG-20" target="_blank" rel="noopener sponsored">
+        <strong>Ball racks &amp; carts</strong>
+        <span>Keep practice balls courtside</span>
+      </a>
+    </div>
+    <p class="affiliate-note">As an Amazon Associate, ProShotClock may earn from qualifying purchases. It costs you nothing extra.</p>
+
+    <!-- Optional AdSense slot (guide only). Dormant until you add your client/slot IDs. -->
+    <div class="ad-slot" id="ad-guide" aria-hidden="true"></div>
 
     <h2>Frequently asked questions</h2>
 
@@ -727,6 +848,11 @@
     <div class="faq-item">
       <h3>Do high school basketball games use a shot clock?</h3>
       <p>It varies by state. Beginning with the 2022-23 season the NFHS allows individual state associations to adopt a 35-second shot clock. A growing number of states use it, while others still play without one.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How long is the shot clock in 3x3 (3v3) basketball?</h3>
+      <p>FIBA 3x3 basketball uses a 12-second shot clock, exactly half of the 24-second clock in the 5-on-5 game — a pace that fits its half-court, single-basket format. Unlike 5x5 there is no separate partial reset like the 14-second reset; a team gets a fresh 12 seconds when it gains a new possession. Pick the "FIBA 3x3 · 12" preset in Settings to use it here.</p>
     </div>
 
     <div class="faq-item">
@@ -768,6 +894,7 @@
         <button data-p1="24" data-p2="14">NBA / FIBA · 24 / 14</button>
         <button data-p1="30" data-p2="20">NCAA · 30 / 20</button>
         <button data-p1="35" data-p2="35">High school · 35</button>
+        <button data-p1="12" data-p2="12">FIBA 3x3 · 12</button>
       </div>
 
       <h3>Display</h3>
@@ -1098,6 +1225,25 @@
       broadcast();
       closeSettings();
     });
+
+    // ---------- Sponsor banner (data-driven from sponsor.json) ----------
+    (function loadSponsor() {
+      fetch('sponsor.json', { cache: 'no-store' })
+        .then(r => r.ok ? r.json() : null)
+        .then(s => {
+          if (!s || !s.active || !s.linkUrl) return;
+          const active = document.getElementById('sponsor-active');
+          const empty  = document.getElementById('sponsor-empty');
+          const img    = document.getElementById('sponsor-img');
+          const name   = document.getElementById('sponsor-name');
+          active.href = s.linkUrl;
+          if (s.imageUrl) { img.src = s.imageUrl; img.alt = (s.name || 'Sponsor') + ' logo'; img.hidden = false; }
+          name.textContent = s.name || '';
+          empty.hidden = true;
+          active.hidden = false;
+        })
+        .catch(() => { /* keep the advertise CTA */ });
+    })();
 
     // ---------- Init ----------
     applySettingsToUI();

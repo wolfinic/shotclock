@@ -9,7 +9,7 @@ Pages.
 ## Features
 
 - **Two configurable reset presets** — default 24 / 14 (NBA/FIBA), with one-tap
-  presets for NCAA (30 / 20) and high school (35) in Settings
+  presets for NCAA (30 / 20), high school (35) and FIBA 3x3 (12) in Settings
 - **Custom times** from 0.1 to 60.0 seconds for drills
 - **External full-screen display** (`display.html`) for a second monitor or
   projector, kept in sync live via the `BroadcastChannel` API
@@ -54,8 +54,8 @@ page's buzzer** in Settings so the horn only sounds once.
 
 Open **⚙ Settings** on the main page to configure:
 
-- **Reset presets** (Reset 1 / Reset 2), with quick presets for NBA/FIBA, NCAA
-  and high school
+- **Reset presets** (Reset 1 / Reset 2), with quick presets for NBA/FIBA, NCAA,
+  high school and FIBA 3x3 (12s)
 - **Display options** — show tenths under 5s, FIBA blank-at-full, mute the
   console buzzer
 - **Keyboard shortcuts** — click a field and press the key to remap it
@@ -127,6 +127,40 @@ git push origin main
 `index.html` includes Open Graph / Twitter cards and JSON-LD structured data
 (`WebApplication` + `FAQPage`). `robots.txt`, `sitemap.xml`, and `llms.txt`
 support both traditional search engines and AI answer engines.
+
+## Monetization
+
+Three revenue hooks, all live in the static page (no backend):
+
+**Sponsor banner.** Driven by `sponsor.json`. While `active` is `false`, the
+guide shows an "advertise on ProShotClock" call-to-action; the external display
+shows nothing. To run a sponsor, edit `sponsor.json` and push:
+
+```json
+{
+  "active": true,
+  "name": "Acme Sports",
+  "imageUrl": "https://.../logo.png",
+  "linkUrl": "https://acme.example",
+  "until": "2026-12-31"
+}
+```
+
+The banner then appears at the top of the guide **and** as a strip on the
+external display (seen by the whole gym). Sell a slot with a hosted checkout
+(Stripe Payment Link / Gumroad — no backend), collect the logo, paste it here.
+For fully automatic "pay → banner appears", add a Stripe webhook that rewrites
+`sponsor.json` via a serverless function (e.g. a free Cloudflare Worker) or a
+GitHub Action.
+
+**Affiliate gear.** The "Recommended shot-clock gear" block in the guide uses
+Amazon Associates. Replace every `AMAZON_TAG-20` in `index.html` with your real
+Associates tag to start earning.
+
+**Display ads (optional).** `#ad-guide` is an empty slot in the guide, kept
+clean and dormant. Drop an AdSense unit there to activate. At low traffic the
+affiliate and sponsor hooks will out-earn ads, so this is best left off until
+volume grows.
 
 ## License
 
