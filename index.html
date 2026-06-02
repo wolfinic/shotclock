@@ -1217,12 +1217,19 @@
       draft.showDecimals = els.decimals.checked;
       draft.blankAtFull = els.blankFull.checked;
       draft.muteConsole = els.mute.checked;
+      const baseChanged = draft.time1 !== settings.time1;
       settings = draft;
       saveSettings();
       applySettingsToUI();
-      if (!isRunning) renderClockText();
-      updateClockDisplay();
-      broadcast();
+      // If the base (Reset 1) time changed and the clock is idle, jump straight
+      // to the new base instead of keeping the value from the previous mode.
+      if (baseChanged && !isRunning) {
+        resetShotClock(settings.time1);
+      } else {
+        if (!isRunning) renderClockText();
+        updateClockDisplay();
+        broadcast();
+      }
       closeSettings();
     });
 
