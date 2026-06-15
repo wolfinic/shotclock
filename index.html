@@ -768,6 +768,10 @@
         <tr><td>FIBA 3x3 (3v3, half-court)</td><td>12 seconds</td><td>No partial reset — fresh 12s on a new possession</td></tr>
       </tbody>
     </table>
+    <p>
+      Dedicated guides with the clock pre-set: the <a href="/30-second-shot-clock/">30-second NCAA shot clock</a>
+      and the <a href="/3x3-shot-clock/">3x3 (12-second) shot clock</a>.
+    </p>
 
     <h2>How to use this shot clock</h2>
     <ul>
@@ -800,7 +804,8 @@
       After a change of possession a team must clear the ball behind the two-point arc before it can score, and the
       12-second clock starts when the team gains control. Unlike 5-on-5 there is no separate partial reset (no
       14-second equivalent) — a new possession simply gets a fresh 12 seconds. To run a 3x3 clock here, open
-      <strong>Settings</strong> and pick the <strong>FIBA 3x3 · 12</strong> preset, or just type 12 as a custom time.
+      <strong>Settings</strong> and pick the <strong>FIBA 3x3 · 12</strong> preset, or use the dedicated
+      <a href="/3x3-shot-clock/">3x3 shot clock</a> page, which loads pre-set to 12 seconds.
     </p>
 
     <h2>Recommended shot-clock gear</h2>
@@ -958,13 +963,25 @@
 
     let settings = loadSettings();
 
-    // URL override (e.g. /?decimals=off — the former /pieni whole-seconds view).
+    // URL override (e.g. /?decimals=off — the former /pieni whole-seconds view,
+    // or /?preset=ncaa used by the landing pages that embed this clock).
     // Applied for this visit only; not written to localStorage unless the user saves.
     (function applyUrlParams() {
       const p = new URLSearchParams(location.search);
       if (p.has('decimals')) {
         const v = p.get('decimals').toLowerCase();
         settings.showDecimals = !(v === 'off' || v === '0' || v === 'false' || v === 'no');
+      }
+      if (p.has('preset')) {
+        const PRESETS = {
+          nba:  { time1: 24, time2: 14 },
+          fiba: { time1: 24, time2: 14 },
+          ncaa: { time1: 30, time2: 20 },
+          hs:   { time1: 35, time2: 35 },
+          '3x3': { time1: 12, time2: 12 }
+        };
+        const preset = PRESETS[p.get('preset').toLowerCase()];
+        if (preset) { settings.time1 = preset.time1; settings.time2 = preset.time2; }
       }
     })();
 

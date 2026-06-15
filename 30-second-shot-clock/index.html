@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>30-Second Shot Clock — Online NCAA College Basketball Timer | ProShotClock</title>
+  <meta name="description" content="Free online 30-second shot clock for NCAA men's and women's college basketball, with the 20-second offensive-rebound reset, end-of-clock buzzer and keyboard shortcuts. No download, runs in any browser.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="author" content="Niccolò Bevacqua">
+  <meta name="theme-color" content="#1a1a1a">
+  <link rel="canonical" href="https://proshotclock.com/30-second-shot-clock/">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="ProShotClock">
+  <meta property="og:title" content="30-Second Shot Clock — Online NCAA College Basketball Timer">
+  <meta property="og:description" content="Free 30-second NCAA shot clock with the 20-second offensive-rebound reset, buzzer and keyboard shortcuts. Runs in any browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://i.ibb.co/RHPDGYy/24-2-1.png">
+  <meta property="og:url" content="https://proshotclock.com/30-second-shot-clock/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="30-Second Shot Clock — NCAA Timer | ProShotClock">
+  <meta name="twitter:description" content="Free online 30-second NCAA shot clock with 20-second reset, buzzer and keyboard shortcuts.">
+  <meta name="twitter:image" content="https://i.ibb.co/RHPDGYy/24-2-1.png">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/RHPDGYy/24-2-1.png">
+  <link rel="apple-touch-icon" href="https://i.ibb.co/RHPDGYy/24-2-1.png">
+
+  <!-- Structured data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ProShotClock — 30-Second NCAA Shot Clock",
+    "url": "https://proshotclock.com/30-second-shot-clock/",
+    "description": "Free online 30-second shot clock for NCAA college basketball, with the 20-second offensive-rebound reset, an end-of-clock buzzer and keyboard shortcuts.",
+    "applicationCategory": "SportsApplication",
+    "operatingSystem": "Any (web browser)",
+    "browserRequirements": "Requires JavaScript",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Niccolò Bevacqua" }
+  }
+  </script>
+
+  <!-- Structured data: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Shot clock", "item": "https://proshotclock.com/" },
+      { "@type": "ListItem", "position": 2, "name": "30-second NCAA shot clock", "item": "https://proshotclock.com/30-second-shot-clock/" }
+    ]
+  }
+  </script>
+
+  <!-- Structured data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long is the NCAA shot clock?",
+        "acceptedAnswer": { "@type": "Answer", "text": "NCAA men's and women's college basketball both use a 30-second shot clock. It limits how long the offensive team may hold the ball before a shot that hits the rim." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the NCAA shot clock reset to 20 seconds?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The 30-second clock resets to 20 seconds after an offensive rebound in the frontcourt, a rule in place since the 2018-19 season for men and 2017-18 for women. On a change of possession or a backcourt rebound it resets to a full 30 seconds." }
+      },
+      {
+        "@type": "Question",
+        "name": "When did the NCAA change to a 30-second shot clock?",
+        "acceptedAnswer": { "@type": "Answer", "text": "NCAA men's basketball reduced the shot clock from 35 to 30 seconds beginning with the 2015-16 season. Women's college basketball had already used a 30-second clock and moved to a 10-minute quarter format with the 20-second reset shortly after." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #1a1a1a; color: #e7e7ea; line-height: 1.65; }
+    a { color: #818cf8; }
+
+    .clock-frame {
+      display: block;
+      width: 100%;
+      max-width: 860px;
+      height: 560px;
+      margin: 0 auto;
+      border: 0;
+      border-radius: 0 0 16px 16px;
+      background: #1a1a1a;
+    }
+    .open-bar {
+      max-width: 860px;
+      margin: 1rem auto 0;
+      padding: 0 1.2rem;
+      text-align: center;
+    }
+    .open-bar a.btn {
+      display: inline-block;
+      background: #4f46e5;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .open-bar a.btn:hover { background: #4338ca; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 2.5rem 1.2rem 4rem; }
+    h1 { font-size: clamp(1.7rem, 5vw, 2.4rem); margin-bottom: 0.6rem; line-height: 1.2; }
+    .lede { font-size: 1.1rem; color: #c7c7cf; margin-bottom: 1.5rem; }
+    h2 { font-size: 1.35rem; margin: 2rem 0 0.7rem; }
+    h3 { font-size: 1.05rem; margin: 1.3rem 0 0.4rem; }
+    p, ul { margin-bottom: 0.9rem; }
+    ul { padding-left: 1.3rem; }
+    strong { color: #fff; }
+
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.4rem; font-size: 0.95rem; }
+    th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid #333; }
+    th { color: #a5b4fc; }
+    tr.highlight td { background: rgba(79, 70, 229, 0.16); }
+
+    .related {
+      margin-top: 2.5rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid #333;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .related a {
+      flex: 1 1 200px;
+      background: #232327;
+      border: 1px solid #3a3a40;
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      text-decoration: none;
+      color: #e7e7ea;
+    }
+    .related a:hover { border-color: #818cf8; }
+    .related a strong { display: block; color: #fff; }
+    .related a span { font-size: 0.85rem; color: #9a9aa3; }
+    footer { text-align: center; color: #777; font-size: 0.85rem; padding: 1.5rem; }
+  </style>
+</head>
+<body>
+  <!-- Live 30-second clock (the real ProShotClock app, pre-set to NCAA 30/20) -->
+  <iframe class="clock-frame" src="/?preset=ncaa" title="30-second NCAA shot clock" loading="eager"></iframe>
+  <div class="open-bar">
+    <a class="btn" href="/?preset=ncaa">Open the full 30-second clock &rarr;</a>
+  </div>
+
+  <main>
+    <h1>30-Second Shot Clock</h1>
+    <p class="lede">
+      A free online <strong>30-second shot clock</strong> for NCAA college basketball — men's and women's —
+      with the <strong>20-second offensive-rebound reset</strong>, an end-of-clock buzzer and keyboard
+      shortcuts. The interactive clock above is already set to 30 / 20; press <kbd>Space</kbd> to start and
+      stop, or use the reset buttons.
+    </p>
+
+    <h2>How the NCAA shot clock works</h2>
+    <p>
+      In NCAA basketball the offensive team has <strong>30 seconds</strong> to attempt a shot that hits the rim.
+      If the clock expires first it is a shot-clock violation and the ball goes to the defence. The clock starts
+      when a team gains possession in the backcourt and stops on whistles, made baskets and the end of a period.
+    </p>
+
+    <h3>The 20-second reset</h3>
+    <p>
+      After an <strong>offensive rebound in the frontcourt</strong>, the clock resets to <strong>20 seconds</strong>
+      rather than a full 30 — keeping play quick after a missed shot the offence rebounds. It also resets to 20 on
+      certain defensive fouls or violations when the offence retains the ball in the frontcourt. On a true change of
+      possession, or a rebound recovered in the backcourt, it resets to a full 30 seconds.
+    </p>
+
+    <h2>NCAA vs. other levels</h2>
+    <table>
+      <thead>
+        <tr><th>League / level</th><th>Shot clock</th><th>Reset after offensive rebound</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight"><td>NCAA — men's &amp; women's</td><td>30 seconds</td><td>20 seconds</td></tr>
+        <tr><td>NBA / WNBA / FIBA</td><td>24 seconds</td><td>14 seconds</td></tr>
+        <tr><td>U.S. high school (NFHS)</td><td>35 seconds (state option)</td><td>No standard partial reset</td></tr>
+        <tr><td>FIBA 3x3</td><td>12 seconds</td><td>Fresh 12s on a new possession</td></tr>
+      </tbody>
+    </table>
+
+    <h2>A bit of history</h2>
+    <p>
+      NCAA men's basketball played with a <strong>35-second</strong> clock for years before cutting it to
+      <strong>30 seconds</strong> for the 2015-16 season to boost scoring and pace. The 20-second offensive-rebound
+      reset followed for men in 2018-19 (women adopted it in 2017-18), bringing the college game closer to the rhythm
+      of the NBA and FIBA.
+    </p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>How long is the NCAA shot clock?</h3>
+    <p>Both NCAA men's and women's basketball use a 30-second shot clock.</p>
+    <h3>Does the NCAA shot clock reset to 20 seconds?</h3>
+    <p>Yes — after an offensive rebound in the frontcourt the 30-second clock resets to 20, a rule used since 2018-19 (men) and 2017-18 (women).</p>
+    <h3>When did the NCAA move to 30 seconds?</h3>
+    <p>Men's college basketball dropped from 35 to 30 seconds for the 2015-16 season; the women's game was already at 30.</p>
+
+    <div class="related">
+      <a href="/"><strong>24-second shot clock</strong><span>NBA · WNBA · FIBA, with 14s reset</span></a>
+      <a href="/3x3-shot-clock/"><strong>3x3 shot clock</strong><span>FIBA 3x3 · 12 seconds</span></a>
+    </div>
+  </main>
+
+  <footer>
+    <a href="/">ProShotClock</a> — free online basketball shot clock. No sign-up, no download.
+  </footer>
+</body>
+</html>

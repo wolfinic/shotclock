@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3x3 Shot Clock — Online FIBA 3x3 12-Second Basketball Timer | ProShotClock</title>
+  <meta name="description" content="Free online 12-second shot clock for FIBA 3x3 (3v3) basketball, with an end-of-clock buzzer and keyboard shortcuts. The fast half-court game's timer, in any browser — no download.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="author" content="Niccolò Bevacqua">
+  <meta name="theme-color" content="#1a1a1a">
+  <link rel="canonical" href="https://proshotclock.com/3x3-shot-clock/">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="ProShotClock">
+  <meta property="og:title" content="3x3 Shot Clock — FIBA 3x3 12-Second Basketball Timer">
+  <meta property="og:description" content="Free 12-second shot clock for FIBA 3x3 (3v3) basketball, with buzzer and keyboard shortcuts. Runs in any browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://i.ibb.co/RHPDGYy/24-2-1.png">
+  <meta property="og:url" content="https://proshotclock.com/3x3-shot-clock/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="3x3 Shot Clock — FIBA 3x3 12-Second Timer | ProShotClock">
+  <meta name="twitter:description" content="Free online 12-second FIBA 3x3 shot clock with buzzer and keyboard shortcuts.">
+  <meta name="twitter:image" content="https://i.ibb.co/RHPDGYy/24-2-1.png">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/RHPDGYy/24-2-1.png">
+  <link rel="apple-touch-icon" href="https://i.ibb.co/RHPDGYy/24-2-1.png">
+
+  <!-- Structured data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ProShotClock — 12-Second FIBA 3x3 Shot Clock",
+    "url": "https://proshotclock.com/3x3-shot-clock/",
+    "description": "Free online 12-second shot clock for FIBA 3x3 (3v3) basketball, with an end-of-clock buzzer and keyboard shortcuts.",
+    "applicationCategory": "SportsApplication",
+    "operatingSystem": "Any (web browser)",
+    "browserRequirements": "Requires JavaScript",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Niccolò Bevacqua" }
+  }
+  </script>
+
+  <!-- Structured data: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Shot clock", "item": "https://proshotclock.com/" },
+      { "@type": "ListItem", "position": 2, "name": "3x3 shot clock", "item": "https://proshotclock.com/3x3-shot-clock/" }
+    ]
+  }
+  </script>
+
+  <!-- Structured data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long is the shot clock in 3x3 basketball?",
+        "acceptedAnswer": { "@type": "Answer", "text": "FIBA 3x3 (3v3) basketball uses a 12-second shot clock, exactly half of the 24-second clock in the 5-on-5 game. The shorter clock keeps the half-court, single-basket game fast." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the 3x3 shot clock have a 14-second reset?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Unlike 5-on-5 there is no separate partial reset in 3x3. A team simply gets a fresh 12 seconds when it gains a new possession; the clock starts as soon as the team gains control of the ball." }
+      },
+      {
+        "@type": "Question",
+        "name": "When does the 12-second clock start in 3x3?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The 12-second clock starts the moment a team gains control of the ball. After a change of possession the team must also clear the ball behind the two-point arc before it can score." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #1a1a1a; color: #e7e7ea; line-height: 1.65; }
+    a { color: #818cf8; }
+
+    .clock-frame {
+      display: block;
+      width: 100%;
+      max-width: 860px;
+      height: 560px;
+      margin: 0 auto;
+      border: 0;
+      border-radius: 0 0 16px 16px;
+      background: #1a1a1a;
+    }
+    .open-bar { max-width: 860px; margin: 1rem auto 0; padding: 0 1.2rem; text-align: center; }
+    .open-bar a.btn {
+      display: inline-block;
+      background: #4f46e5;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .open-bar a.btn:hover { background: #4338ca; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 2.5rem 1.2rem 4rem; }
+    h1 { font-size: clamp(1.7rem, 5vw, 2.4rem); margin-bottom: 0.6rem; line-height: 1.2; }
+    .lede { font-size: 1.1rem; color: #c7c7cf; margin-bottom: 1.5rem; }
+    h2 { font-size: 1.35rem; margin: 2rem 0 0.7rem; }
+    h3 { font-size: 1.05rem; margin: 1.3rem 0 0.4rem; }
+    p, ul { margin-bottom: 0.9rem; }
+    ul { padding-left: 1.3rem; }
+    strong { color: #fff; }
+
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.4rem; font-size: 0.95rem; }
+    th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid #333; }
+    th { color: #a5b4fc; }
+    tr.highlight td { background: rgba(79, 70, 229, 0.16); }
+
+    .related {
+      margin-top: 2.5rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid #333;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .related a {
+      flex: 1 1 200px;
+      background: #232327;
+      border: 1px solid #3a3a40;
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      text-decoration: none;
+      color: #e7e7ea;
+    }
+    .related a:hover { border-color: #818cf8; }
+    .related a strong { display: block; color: #fff; }
+    .related a span { font-size: 0.85rem; color: #9a9aa3; }
+    footer { text-align: center; color: #777; font-size: 0.85rem; padding: 1.5rem; }
+  </style>
+</head>
+<body>
+  <!-- Live 12-second clock (the real ProShotClock app, pre-set to FIBA 3x3) -->
+  <iframe class="clock-frame" src="/?preset=3x3" title="12-second FIBA 3x3 shot clock" loading="eager"></iframe>
+  <div class="open-bar">
+    <a class="btn" href="/?preset=3x3">Open the full 12-second clock &rarr;</a>
+  </div>
+
+  <main>
+    <h1>3x3 Basketball Shot Clock (12 Seconds)</h1>
+    <p class="lede">
+      A free online <strong>12-second shot clock</strong> for <strong>FIBA 3x3</strong> (3v3) basketball — the
+      fast, half-court game that became an Olympic sport at Tokyo 2020. The clock above is already set to 12
+      seconds; press <kbd>Space</kbd> to start and stop, or hit reset for a fresh possession.
+    </p>
+
+    <h2>How long is the 3x3 shot clock?</h2>
+    <p>
+      FIBA 3x3 runs on a <strong>12-second shot clock</strong> — exactly half of the 24 seconds used in 5-on-5.
+      The shorter clock keeps the single-basket, half-court game relentless: teams play to 21 points or the highest
+      score after 10 minutes, scoring one point from inside the arc and two from beyond it, with three players a side
+      plus one substitute.
+    </p>
+
+    <h2>No 14-second reset — just a fresh 12</h2>
+    <p>
+      Unlike 5-on-5, 3x3 has <strong>no separate partial reset</strong> (there is no 14-second equivalent). A team
+      simply gets a fresh <strong>12 seconds</strong> when it gains a new possession, and the clock starts the moment
+      the team gains control of the ball. After a change of possession the team must also <strong>clear the ball
+      behind the two-point arc</strong> before it can score.
+    </p>
+
+    <h2>3x3 vs. 5-on-5</h2>
+    <table>
+      <thead>
+        <tr><th>Format</th><th>Shot clock</th><th>Reset rule</th></tr>
+      </thead>
+      <tbody>
+        <tr class="highlight"><td>FIBA 3x3 (half-court)</td><td>12 seconds</td><td>Fresh 12s on a new possession</td></tr>
+        <tr><td>NBA / WNBA / FIBA 5v5</td><td>24 seconds</td><td>14s after an offensive rebound</td></tr>
+        <tr><td>NCAA college</td><td>30 seconds</td><td>20s after an offensive rebound</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Using this clock for 3x3</h2>
+    <ul>
+      <li>The clock above is pre-set to <strong>12 seconds</strong> — no setup needed.</li>
+      <li><strong>Start / stop</strong> with the button or the <kbd>Space</kbd> bar.</li>
+      <li><strong>Reset</strong> to a fresh 12 on each new possession.</li>
+      <li>Under 5 seconds the display shows <strong>tenths</strong> and turns red; the <strong>buzzer</strong> sounds at zero.</li>
+      <li>Open the <a href="/?preset=3x3">full clock</a> to use the external display on a second screen at the scorer's table.</li>
+    </ul>
+
+    <h2>Frequently asked questions</h2>
+    <h3>How long is the shot clock in 3x3 basketball?</h3>
+    <p>12 seconds — half of the 24-second clock used in the 5-on-5 game.</p>
+    <h3>Is there a 14-second reset in 3x3?</h3>
+    <p>No. A new possession simply gets a fresh 12 seconds; there is no partial reset.</p>
+    <h3>When does the 12-second clock start?</h3>
+    <p>As soon as a team gains control of the ball. After a turnover the ball must also be cleared behind the arc before scoring.</p>
+
+    <div class="related">
+      <a href="/"><strong>24-second shot clock</strong><span>NBA · WNBA · FIBA, with 14s reset</span></a>
+      <a href="/30-second-shot-clock/"><strong>30-second shot clock</strong><span>NCAA college · 20s reset</span></a>
+    </div>
+  </main>
+
+  <footer>
+    <a href="/">ProShotClock</a> — free online basketball shot clock. No sign-up, no download.
+  </footer>
+</body>
+</html>
