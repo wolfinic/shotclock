@@ -10,6 +10,12 @@
   <meta name="theme-color" content="#1a1a1a">
   <link rel="canonical" href="https://proshotclock.com/">
 
+  <!-- Embed mode (?embed=1): strip page chrome so the clock can be iframed cleanly.
+       Set early on <html> to avoid a flash of the full page. -->
+  <script>
+    try { if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed'); } catch (e) {}
+  </script>
+
   <!-- Open Graph -->
   <meta property="og:site_name" content="ProShotClock">
   <meta property="og:title" content="Online Basketball Shot Clock — 24s, 30s, 35s & 12s (3x3) Timer">
@@ -248,6 +254,25 @@
       align-items: center;
       padding: 1rem;
       position: relative;
+    }
+
+    /* ---------- Embed mode (?embed=1): clock only, for iframing on landing pages ---------- */
+    html.embed, html.embed body { background: #1a1a1a; min-height: 0; }
+    html.embed .sidebar,
+    html.embed .sidebar-toggle,
+    html.embed .scroll-cue,
+    html.embed .toolbar,
+    html.embed .content,
+    html.embed footer { display: none !important; }
+    html.embed .hero { min-height: 0; padding: 0.5rem; }
+    html.embed .app-container {
+      height: auto;
+      width: 100%;
+      max-width: 760px;
+      box-shadow: none;
+      backdrop-filter: none;
+      background: transparent;
+      padding: 0.5rem;
     }
 
     .app-container {
@@ -1115,6 +1140,8 @@
     function applySettingsToUI() {
       reset24Button.textContent = 'Reset to ' + settings.time1;
       reset14Button.textContent = 'Reset to ' + settings.time2;
+      // No point showing a second, identical reset (e.g. FIBA 3x3 12/12, high school 35/35).
+      reset14Button.style.display = (settings.time2 === settings.time1) ? 'none' : '';
     }
 
     // ---------- Controls ----------
