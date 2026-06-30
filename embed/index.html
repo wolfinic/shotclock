@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Embed a Free Basketball Shot Clock Widget on Your Site | ProShotClock</title>
+  <meta name="description" content="Add a free basketball shot clock widget to any website with one line of HTML. Pick 24s (NBA/FIBA), 30s (NCAA), 35s (high school) or 12s (3x3), copy the embed code, and paste. No sign-up, no download.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="author" content="Niccolò Bevacqua">
+  <meta name="theme-color" content="#1a1a1a">
+  <link rel="canonical" href="https://proshotclock.com/embed/">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="ProShotClock">
+  <meta property="og:title" content="Embed a Free Basketball Shot Clock Widget">
+  <meta property="og:description" content="Add a live basketball shot clock to any website with one line of HTML. 24s, 30s, 35s and 12s (3x3) presets. Free, no sign-up.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://i.ibb.co/RHPDGYy/24-2-1.png">
+  <meta property="og:url" content="https://proshotclock.com/embed/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Embed a Free Basketball Shot Clock Widget | ProShotClock">
+  <meta name="twitter:description" content="Copy-paste a live basketball shot clock onto any site. 24s, 30s, 35s, 12s presets. Free.">
+  <meta name="twitter:image" content="https://i.ibb.co/RHPDGYy/24-2-1.png">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/RHPDGYy/24-2-1.png">
+  <link rel="apple-touch-icon" href="https://i.ibb.co/RHPDGYy/24-2-1.png">
+
+  <!-- Structured data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ProShotClock — Embeddable Basketball Shot Clock Widget",
+    "url": "https://proshotclock.com/embed/",
+    "description": "Free embeddable basketball shot clock widget. Add a live 24s, 30s, 35s or 12s (3x3) shot clock to any website with one line of HTML.",
+    "applicationCategory": "SportsApplication",
+    "operatingSystem": "Any (web browser)",
+    "browserRequirements": "Requires JavaScript",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Niccolò Bevacqua" }
+  }
+  </script>
+
+  <!-- Structured data: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Shot clock", "item": "https://proshotclock.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Embed widget", "item": "https://proshotclock.com/embed/" }
+    ]
+  }
+  </script>
+
+  <!-- Structured data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I add a shot clock to my website?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pick a preset and size on this page, click Copy, and paste the generated HTML snippet into your page where you want the clock to appear. The snippet is a single iframe that loads the live ProShotClock app, so it always stays up to date with no maintenance on your side." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the shot clock widget free to embed?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The widget is completely free to embed on personal, school, club, or commercial sites. The snippet includes a small attribution link back to ProShotClock." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which shot clock lengths can I embed?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You can embed a 24-second clock (NBA, WNBA, FIBA), a 30-second clock (NCAA), a 35-second clock (US high school), or a 12-second clock (FIBA 3x3). Each preset also loads its correct reset rule." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will the embedded clock keep working over time?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The widget is an iframe that points to the live app, so any improvements and fixes appear automatically. There is nothing to install or update." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #1a1a1a; color: #e7e7ea; line-height: 1.65; }
+    a { color: #818cf8; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 2.5rem 1.2rem 4rem; }
+    h1 { font-size: clamp(1.7rem, 5vw, 2.4rem); margin-bottom: 0.6rem; line-height: 1.2; }
+    .lede { font-size: 1.1rem; color: #c7c7cf; margin-bottom: 1.8rem; }
+    h2 { font-size: 1.35rem; margin: 2.2rem 0 0.7rem; }
+    h3 { font-size: 1.05rem; margin: 1.3rem 0 0.4rem; }
+    p, ul { margin-bottom: 0.9rem; }
+    ul { padding-left: 1.3rem; }
+    strong { color: #fff; }
+
+    /* ---------- Generator ---------- */
+    .builder {
+      background: #202024;
+      border: 1px solid #34343c;
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .controls { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.3rem; }
+    .field { flex: 1 1 200px; }
+    .field label { display: block; font-size: 0.8rem; color: #a5b4fc; margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    .field select {
+      width: 100%;
+      background: #16161a;
+      color: #e7e7ea;
+      border: 1px solid #3a3a44;
+      border-radius: 9px;
+      padding: 0.6rem 0.7rem;
+      font-size: 0.95rem;
+    }
+
+    .preview-wrap { text-align: center; margin-bottom: 1.3rem; }
+    .preview-wrap .preview-label { font-size: 0.8rem; color: #777; margin-bottom: 0.5rem; }
+    iframe.preview { border: 0; border-radius: 12px; background: #1a1a1a; max-width: 100%; }
+
+    .snippet label { display: block; font-size: 0.8rem; color: #a5b4fc; margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    textarea#code {
+      width: 100%;
+      height: 110px;
+      background: #16161a;
+      color: #d7d7de;
+      border: 1px solid #3a3a44;
+      border-radius: 9px;
+      padding: 0.7rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.82rem;
+      resize: vertical;
+    }
+    .copy-row { display: flex; align-items: center; gap: 0.9rem; margin-top: 0.7rem; }
+    button#copy {
+      background: #4f46e5;
+      color: #fff;
+      border: 0;
+      border-radius: 10px;
+      padding: 0.7rem 1.3rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    button#copy:hover { background: #4338ca; }
+    #copied { font-size: 0.85rem; color: #4ade80; opacity: 0; transition: opacity 0.2s; }
+    #copied.show { opacity: 1; }
+
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.4rem; font-size: 0.95rem; }
+    th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid #333; }
+    th { color: #a5b4fc; }
+
+    .related {
+      margin-top: 2.5rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid #333;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .related a {
+      flex: 1 1 200px;
+      background: #232327;
+      border: 1px solid #3a3a40;
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      text-decoration: none;
+      color: #e7e7ea;
+    }
+    .related a:hover { border-color: #818cf8; }
+    .related a strong { display: block; color: #fff; }
+    .related a span { font-size: 0.85rem; color: #9a9aa3; }
+    footer { text-align: center; color: #777; font-size: 0.85rem; padding: 1.5rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Embed a Free Basketball Shot Clock Widget</h1>
+    <p class="lede">
+      Add a live <strong>basketball shot clock</strong> to any website, blog, or club page with one line of HTML.
+      Pick a length, copy the code, paste it in. It's free, there's nothing to install, and it stays up to date on its own.
+    </p>
+
+    <div class="builder">
+      <div class="controls">
+        <div class="field">
+          <label for="preset">Shot clock</label>
+          <select id="preset">
+            <option value="nba">24 seconds — NBA / WNBA / FIBA (14s reset)</option>
+            <option value="ncaa">30 seconds — NCAA college (20s reset)</option>
+            <option value="hs">35 seconds — US high school</option>
+            <option value="3x3">12 seconds — FIBA 3x3 (3v3)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="size">Size</label>
+          <select id="size">
+            <option value="320x240">Small — 320 × 240</option>
+            <option value="480x340" selected>Medium — 480 × 340</option>
+            <option value="640x440">Large — 640 × 440</option>
+            <option value="responsive">Responsive — full width</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="preview-wrap">
+        <div class="preview-label">Live preview</div>
+        <iframe id="preview" class="preview" src="/?preset=nba&amp;embed=1" width="480" height="340" title="Basketball shot clock preview" loading="eager"></iframe>
+      </div>
+
+      <div class="snippet">
+        <label for="code">Embed code — copy &amp; paste into your page</label>
+        <textarea id="code" readonly spellcheck="false"></textarea>
+        <div class="copy-row">
+          <button id="copy" type="button">Copy embed code</button>
+          <span id="copied">Copied!</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>How to embed the shot clock</h2>
+    <ul>
+      <li><strong>Choose a clock</strong> — 24s (NBA/FIBA), 30s (NCAA), 35s (high school) or 12s (3x3).</li>
+      <li><strong>Pick a size</strong>, or choose <em>Responsive</em> to let the clock fill its container.</li>
+      <li><strong>Copy</strong> the generated snippet and <strong>paste</strong> it into your page's HTML where you want the clock.</li>
+    </ul>
+    <p>
+      The snippet is a single <code>&lt;iframe&gt;</code> that loads the live ProShotClock app in compact embed mode
+      (just the clock and its controls — no menus or page chrome). Because it points to the live app, every improvement
+      shows up automatically with zero maintenance on your side.
+    </p>
+
+    <h2>What you can embed</h2>
+    <table>
+      <thead>
+        <tr><th>League</th><th>Shot clock</th><th>Reset</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>NBA · WNBA · FIBA 5v5</td><td>24 seconds</td><td>14s after offensive rebound</td></tr>
+        <tr><td>NCAA college</td><td>30 seconds</td><td>20s after offensive rebound</td></tr>
+        <tr><td>US high school (NFHS)</td><td>35 seconds</td><td>full reset</td></tr>
+        <tr><td>FIBA 3x3 (3v3)</td><td>12 seconds</td><td>fresh 12 on new possession</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Frequently asked questions</h2>
+    <h3>How do I add a shot clock to my website?</h3>
+    <p>Pick a preset and size above, click <strong>Copy</strong>, and paste the HTML into your page. No account, no script tag, no build step.</p>
+    <h3>Is it free to embed?</h3>
+    <p>Yes — free for personal, school, club, and commercial sites. The snippet includes a small attribution link back to ProShotClock.</p>
+    <h3>Will the embedded clock keep working?</h3>
+    <p>Yes. It's an iframe pointing at the live app, so fixes and improvements appear automatically. There's nothing to update.</p>
+
+    <div class="related">
+      <a href="/"><strong>24-second shot clock</strong><span>NBA · WNBA · FIBA, with 14s reset</span></a>
+      <a href="/30-second-shot-clock/"><strong>30-second shot clock</strong><span>NCAA college · 20s reset</span></a>
+      <a href="/3x3-shot-clock/"><strong>12-second 3x3 clock</strong><span>FIBA 3x3 half-court game</span></a>
+    </div>
+  </main>
+
+  <footer>
+    <a href="/">ProShotClock</a> — free online basketball shot clock. No sign-up, no download.
+  </footer>
+
+  <script>
+    (function () {
+      var presetEl = document.getElementById('preset');
+      var sizeEl = document.getElementById('size');
+      var preview = document.getElementById('preview');
+      var code = document.getElementById('code');
+      var copyBtn = document.getElementById('copy');
+      var copied = document.getElementById('copied');
+      var BASE = 'https://proshotclock.com';
+
+      var titles = {
+        nba: '24-second basketball shot clock',
+        ncaa: '30-second NCAA shot clock',
+        hs: '35-second high school shot clock',
+        '3x3': '12-second FIBA 3x3 shot clock'
+      };
+
+      function build() {
+        var preset = presetEl.value;
+        var size = sizeEl.value;
+        var src = BASE + '/?preset=' + preset + '&embed=1';
+        var title = titles[preset];
+
+        var iframe;
+        if (size === 'responsive') {
+          preview.width = 480; preview.height = 340;
+          iframe = '<iframe src="' + src + '" title="' + title + '" loading="lazy"\n' +
+                   '        style="width:100%;max-width:520px;height:340px;border:0;border-radius:12px"></iframe>';
+        } else {
+          var wh = size.split('x');
+          preview.width = wh[0]; preview.height = wh[1];
+          iframe = '<iframe src="' + src + '" width="' + wh[0] + '" height="' + wh[1] + '"\n' +
+                   '        title="' + title + '" loading="lazy"\n' +
+                   '        style="border:0;border-radius:12px"></iframe>';
+        }
+
+        // Keep the live preview in sync (preview omits the &embed cache-buster; same src).
+        if (preview.src.indexOf('preset=' + preset) === -1) preview.src = '/?preset=' + preset + '&embed=1';
+
+        code.value =
+          '<!-- Basketball shot clock by ProShotClock -->\n' +
+          iframe + '\n' +
+          '<p style="font:13px/1.4 sans-serif;margin:4px 0 0">' +
+          '<a href="' + BASE + '/" target="_blank" rel="noopener">Shot clock by ProShotClock</a></p>';
+      }
+
+      presetEl.addEventListener('change', build);
+      sizeEl.addEventListener('change', build);
+
+      copyBtn.addEventListener('click', function () {
+        code.select();
+        var done = function () { copied.classList.add('show'); setTimeout(function () { copied.classList.remove('show'); }, 1800); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code.value).then(done, function () { document.execCommand('copy'); done(); });
+        } else {
+          document.execCommand('copy'); done();
+        }
+      });
+
+      build();
+    })();
+  </script>
+</body>
+</html>
