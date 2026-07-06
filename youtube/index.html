@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shot Clock over YouTube — Free Play Practice | ProShotClock</title>
+  <meta name="description" content="Load any YouTube basketball game and practice operating a 24-second shot clock over the footage in real time. Free, no download — start, stop and reset with your keyboard while the game plays.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="author" content="Niccolò Bevacqua">
+  <meta name="theme-color" content="#1a1a1a">
+  <link rel="canonical" href="https://proshotclock.com/youtube/">
+
+  <!-- Language alternates -->
+  <link rel="alternate" hreflang="en" href="https://proshotclock.com/youtube/">
+  <link rel="alternate" hreflang="x-default" href="https://proshotclock.com/youtube/">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="ProShotClock">
+  <meta property="og:title" content="Shot Clock over YouTube — Free Play Practice">
+  <meta property="og:description" content="Load any YouTube basketball game and practice operating the 24-second shot clock over the footage in real time.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://i.ibb.co/RHPDGYy/24-2-1.png">
+  <meta property="og:url" content="https://proshotclock.com/youtube/">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shot Clock over YouTube — ProShotClock">
+  <meta name="twitter:description" content="Practice operating a 24-second basketball shot clock over any YouTube game, in real time.">
+  <meta name="twitter:image" content="https://i.ibb.co/RHPDGYy/24-2-1.png">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/RHPDGYy/24-2-1.png">
+  <link rel="apple-touch-icon" href="https://i.ibb.co/RHPDGYy/24-2-1.png">
+
+  <!-- Structured data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ProShotClock — Shot Clock over YouTube (Free Play)",
+    "url": "https://proshotclock.com/youtube/",
+    "description": "Load any YouTube basketball game and practice operating a 24-second shot clock over the footage in real time, with keyboard shortcuts and an end-of-clock buzzer.",
+    "applicationCategory": "SportsApplication",
+    "operatingSystem": "Any (web browser)",
+    "browserRequirements": "Requires JavaScript",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Niccolò Bevacqua" }
+  }
+  </script>
+
+  <!-- Structured data: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Shot clock", "item": "https://proshotclock.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Shot clock over YouTube", "item": "https://proshotclock.com/youtube/" }
+    ]
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S9JGHKFKBG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-S9JGHKFKBG');
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); color: #e7e7ea; line-height: 1.65; min-height: 100vh; }
+    a { color: #818cf8; }
+
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 1.5rem 1.2rem 0; }
+
+    .top { text-align: center; margin-bottom: 1rem; }
+    .top h1 { font-size: clamp(1.3rem, 3.5vw, 1.9rem); font-weight: 600; margin-bottom: 0.3rem; }
+    .top p { color: #9a9aa3; font-size: 0.95rem; }
+
+    /* ---------- URL loader ---------- */
+    .loader {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 700px;
+      margin: 1rem auto;
+      flex-wrap: wrap;
+    }
+    .loader input {
+      flex: 1 1 260px;
+      min-width: 0;
+      padding: 0.7rem 0.9rem;
+      font-size: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      color: #fff;
+    }
+    .loader input:focus { outline: none; border-color: rgba(79, 70, 229, 0.6); }
+    .loader button {
+      padding: 0.7rem 1.3rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      background: #4f46e5;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .loader button:hover { background: #4338ca; }
+    .loader-error { color: #f87171; font-size: 0.85rem; text-align: center; min-height: 1.1rem; margin-bottom: 0.5rem; }
+
+    /* ---------- Video stage with corner overlay ---------- */
+    .stage {
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+    .stage iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+    /* Placeholder shown before a video is loaded */
+    .placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      text-align: center;
+      padding: 1.5rem;
+      color: #8a8a93;
+    }
+    .placeholder .big { font-size: 2.6rem; }
+    .placeholder p { max-width: 420px; font-size: 0.95rem; }
+
+    /* The overlay shot clock, pinned to a corner of the video */
+    .overlay-clock {
+      position: absolute;
+      top: 3%;
+      right: 3.5%;
+      min-width: 1.7em;
+      padding: 0.15em 0.35em;
+      font-size: clamp(2.2rem, 8vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1;
+      text-align: center;
+      color: #4ade80;
+      background: rgba(0, 0, 0, 0.72);
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 0 18px currentColor;
+      pointer-events: none;
+      user-select: none;
+      transition: color 0.2s ease;
+      z-index: 5;
+    }
+    .overlay-clock.warning { color: #fbbf24; }
+    .overlay-clock.danger { color: #ef4444; }
+    .overlay-clock.blank { color: transparent; text-shadow: none; }
+
+    /* Let the operator move the clock to any corner */
+    .corner-picker {
+      display: flex;
+      gap: 0.4rem;
+      justify-content: center;
+      margin: 0.8rem 0 0;
+      flex-wrap: wrap;
+    }
+    .corner-picker span { color: #777; font-size: 0.8rem; align-self: center; }
+    .corner-picker button {
+      background: rgba(255, 255, 255, 0.07);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    .corner-picker button.active, .corner-picker button:hover { background: rgba(79, 70, 229, 0.4); color: #fff; }
+
+    /* ---------- Control bar ---------- */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      max-width: 960px;
+      margin: 1rem auto 0;
+    }
+    .controls button {
+      font-size: 1rem;
+      padding: 0.7rem 1.1rem;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .controls button:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
+    .controls #yt-startstop { background: rgba(79, 70, 229, 0.4); }
+    .controls #yt-startstop:hover { background: rgba(79, 70, 229, 0.6); }
+    .controls select {
+      font-size: 0.95rem;
+      padding: 0.7rem 0.6rem;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+    }
+
+    .shortcuts {
+      text-align: center;
+      color: #888;
+      font-size: 0.85rem;
+      margin: 1rem auto 0;
+    }
+    .shortcuts kbd {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      margin: 0 0.15rem;
+      font-size: 0.9em;
+    }
+
+    /* ---------- SEO content ---------- */
+    main.content { max-width: 800px; margin: 0 auto; padding: 3rem 1.2rem 4rem; color: #d4d4d4; }
+    .content h2 { font-size: clamp(1.3rem, 4vw, 1.9rem); color: #fff; margin: 2.2rem 0 0.8rem; }
+    .content h3 { font-size: 1.1rem; color: #fff; margin: 1.4rem 0 0.4rem; }
+    .content p, .content ul { margin-bottom: 1rem; }
+    .content ul { padding-left: 1.3rem; }
+    .content li { margin-bottom: 0.4rem; }
+    .content strong { color: #fff; }
+    .content kbd { background:#2a2a30; border:1px solid #444; border-radius:5px; padding:0 0.35rem; font-size:0.85em; }
+
+    .related { margin-top: 2.5rem; padding-top: 1.4rem; border-top: 1px solid #333; display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .related a { flex: 1 1 200px; background: #232327; border: 1px solid #3a3a40; border-radius: 10px; padding: 0.8rem 1rem; text-decoration: none; color: #e7e7ea; }
+    .related a:hover { border-color: #818cf8; }
+    .related a strong { display: block; color: #fff; }
+    .related a span { font-size: 0.85rem; color: #9a9aa3; }
+    footer { text-align: center; color: #777; font-size: 0.85rem; padding: 1.5rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1>🏀 Shot Clock over YouTube — Free Play</h1>
+      <p>Paste a YouTube basketball game, press play, and run the 24-second clock over it in real time.</p>
+    </div>
+
+    <form class="loader" id="loader" autocomplete="off">
+      <input type="url" id="yt-url" inputmode="url" placeholder="Paste a YouTube URL (youtube.com/watch?v=… or youtu.be/…)" aria-label="YouTube URL">
+      <button type="submit">Load video</button>
+    </form>
+    <div class="loader-error" id="yt-error" role="alert"></div>
+
+    <div class="stage" id="stage">
+      <div class="placeholder" id="placeholder">
+        <div class="big">▶</div>
+        <p>No video yet. Paste a YouTube link above — a full-game replay or highlight reel works great — then operate the shot clock over the footage.</p>
+      </div>
+      <!-- iframe is injected here on load -->
+      <div class="overlay-clock" id="overlay-clock">24</div>
+    </div>
+
+    <div class="corner-picker" aria-label="Clock position">
+      <span>Clock corner:</span>
+      <button data-corner="tl">↖</button>
+      <button data-corner="tr" class="active">↗</button>
+      <button data-corner="bl">↙</button>
+      <button data-corner="br">↘</button>
+    </div>
+
+    <div class="controls">
+      <button id="yt-startstop">Start / Stop</button>
+      <button id="yt-reset1">Reset to 24</button>
+      <button id="yt-reset2">Reset to 14</button>
+      <button id="yt-blank">Blank</button>
+      <select id="yt-preset" aria-label="Shot clock preset">
+        <option value="24,14">NBA / FIBA · 24 / 14</option>
+        <option value="30,20">NCAA · 30 / 20</option>
+        <option value="35,35">High school · 35</option>
+        <option value="12,12">FIBA 3x3 · 12</option>
+      </select>
+    </div>
+
+    <div class="shortcuts">
+      <kbd>Space</kbd> Start/Stop &bull;
+      <kbd>&rarr;</kbd> Reset 24 &bull;
+      <kbd>&larr;</kbd> Reset 14 &bull;
+      <kbd>&uarr;</kbd> Blank
+    </div>
+  </div>
+
+  <audio id="siren-sound" src="/siren.mp3" preload="auto"></audio>
+
+  <main class="content">
+    <h2>Practice operating a shot clock over real basketball footage</h2>
+    <p>
+      <strong>Free Play</strong> turns any YouTube basketball game into a training tool for shot-clock operators.
+      Load a full-game replay or a highlight reel, press play, and run the <strong>24-second shot clock</strong> over
+      the footage exactly as you would at the scorer's table — start it when a team gains possession, reset to
+      <strong>14</strong> after an offensive rebound, and let the <strong>buzzer</strong> fire when it hits zero.
+      It's the closest thing to live reps without being courtside, and it's completely free with no download.
+    </p>
+
+    <h2>How it works</h2>
+    <ul>
+      <li><strong>Paste a YouTube link</strong> — a <code>youtube.com/watch?v=…</code> or <code>youtu.be/…</code> URL — and press <em>Load video</em>.</li>
+      <li>Press play on the video, then use the <strong>shot clock overlay</strong> in the corner to follow the action.</li>
+      <li><strong>Operate by keyboard:</strong> <kbd>Space</kbd> to start/stop, <kbd>&rarr;</kbd> to reset to 24, <kbd>&larr;</kbd> to reset to 14, <kbd>&uarr;</kbd> to blank the display between possessions.</li>
+      <li>Switch the <strong>preset</strong> to match the game — NBA/FIBA 24/14, NCAA 30/20, high school 35, or FIBA 3x3 12.</li>
+      <li>Move the clock to whichever corner keeps the ball in view.</li>
+    </ul>
+
+    <h2>Who it's for</h2>
+    <p>
+      New <strong>table officials</strong> and <strong>shot-clock operators</strong> use Free Play to rehearse the
+      timing of resets before a real assignment. <strong>Coaches</strong> use it to teach players how much 24 seconds
+      actually feels like, and <strong>fans</strong> just enjoy running the clock along with a classic game. Because the
+      clock is driven entirely by you, it's also a sharp test of reaction time — how quickly can you reset after the
+      ball hits the rim?
+    </p>
+
+    <h2>Is this legal / does it use the real game feed?</h2>
+    <p>
+      Free Play uses YouTube's standard embedded player, so you're watching the video on YouTube's own terms, right on
+      this page. The shot clock is a separate overlay that <em>you</em> operate — it isn't synced to the broadcast and
+      doesn't read anything from the video. Think of it as a practice clock sitting in front of your screen.
+    </p>
+
+    <div class="related">
+      <a href="/"><strong>Full shot clock</strong><span>The main app · presets · external display</span></a>
+      <a href="/30-second-shot-clock/"><strong>30-second clock</strong><span>NCAA college basketball</span></a>
+      <a href="/3x3-shot-clock/"><strong>3x3 clock (12s)</strong><span>FIBA 3x3 · half-court</span></a>
+    </div>
+  </main>
+
+  <footer>
+    <a href="/">ProShotClock</a> — a free basketball shot clock. No sign-up, no download.
+  </footer>
+
+  <script>
+    // ---------- Elements ----------
+    const stage        = document.getElementById('stage');
+    const placeholder  = document.getElementById('placeholder');
+    const overlayClock = document.getElementById('overlay-clock');
+    const urlInput     = document.getElementById('yt-url');
+    const loaderForm   = document.getElementById('loader');
+    const errorEl      = document.getElementById('yt-error');
+    const sirenSound   = document.getElementById('siren-sound');
+    const startStopBtn = document.getElementById('yt-startstop');
+    const presetSelect = document.getElementById('yt-preset');
+
+    // ---------- Clock state (ported from the main ProShotClock app) ----------
+    let time1 = 24, time2 = 14;          // reset presets
+    let showDecimals = true;
+    let value = time1;
+    let running = false;
+    let interval = null;
+    let hasBuzzed = false;
+    let blank = false;
+    let lastReset = time1;
+
+    function renderText() {
+      if (blank) { overlayClock.textContent = ''; return; }
+      const t = Math.max(0, value);
+      if (showDecimals && t <= 5) overlayClock.textContent = t.toFixed(1);
+      else overlayClock.textContent = Math.floor(t);
+    }
+
+    function renderColor() {
+      overlayClock.classList.remove('warning', 'danger', 'blank');
+      if (blank) { overlayClock.classList.add('blank'); return; }
+      if (value <= 5) overlayClock.classList.add('danger');
+      else if (value <= 10) overlayClock.classList.add('warning');
+    }
+
+    function playBuzzer() {
+      sirenSound.currentTime = 0;
+      sirenSound.play().catch(() => {});
+    }
+
+    function tick() {
+      renderText();
+      if (value <= 0) {
+        value = 0;
+        if (!blank) overlayClock.textContent = showDecimals ? '0.0' : '0';
+        if (!hasBuzzed) { playBuzzer(); hasBuzzed = true; stop(); }
+      } else {
+        value = Math.round((value - 0.1) * 10) / 10;
+        hasBuzzed = false;
+      }
+      renderColor();
+    }
+
+    function start() {
+      if (!running && value > 0) {
+        running = true;
+        blank = false;
+        interval = setInterval(tick, 100);
+        renderColor();
+      }
+    }
+    function stop() {
+      running = false;
+      clearInterval(interval);
+    }
+    function toggle() { running ? stop() : start(); }
+
+    function reset(v) {
+      stop();
+      value = v;
+      lastReset = v;
+      hasBuzzed = false;
+      blank = false;
+      renderText();
+      renderColor();
+    }
+
+    function toggleBlank() {
+      if (!running) {
+        blank = !blank;
+        if (!blank) value = lastReset;
+        renderText();
+        renderColor();
+      }
+    }
+
+    // ---------- Controls ----------
+    startStopBtn.addEventListener('click', toggle);
+    document.getElementById('yt-reset1').addEventListener('click', () => reset(time1));
+    document.getElementById('yt-reset2').addEventListener('click', () => reset(time2));
+    document.getElementById('yt-blank').addEventListener('click', toggleBlank);
+
+    presetSelect.addEventListener('change', () => {
+      const [a, b] = presetSelect.value.split(',').map(Number);
+      time1 = a; time2 = b;
+      document.getElementById('yt-reset1').textContent = 'Reset to ' + time1;
+      document.getElementById('yt-reset2').textContent = 'Reset to ' + time2;
+      document.getElementById('yt-reset2').style.display = (time1 === time2) ? 'none' : '';
+      reset(time1);
+    });
+
+    // Keyboard — but never hijack typing in the URL field
+    document.addEventListener('keydown', (e) => {
+      if (document.activeElement === urlInput) return;
+      switch (e.code) {
+        case 'Space':      e.preventDefault(); toggle(); break;
+        case 'ArrowRight': e.preventDefault(); reset(time1); break;
+        case 'ArrowLeft':  e.preventDefault(); reset(time2); break;
+        case 'ArrowUp':    e.preventDefault(); toggleBlank(); break;
+      }
+    });
+
+    // ---------- Corner picker ----------
+    const CORNERS = {
+      tl: { top: '3%', right: 'auto', bottom: 'auto', left: '3.5%' },
+      tr: { top: '3%', right: '3.5%', bottom: 'auto', left: 'auto' },
+      bl: { top: 'auto', right: 'auto', bottom: '3%', left: '3.5%' },
+      br: { top: 'auto', right: '3.5%', bottom: '3%', left: 'auto' }
+    };
+    document.querySelectorAll('.corner-picker button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.corner-picker button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        Object.assign(overlayClock.style, CORNERS[btn.dataset.corner]);
+      });
+    });
+
+    // ---------- YouTube URL parsing + embed ----------
+    function extractVideoId(raw) {
+      if (!raw) return null;
+      const s = raw.trim();
+      // Bare 11-char ID
+      if (/^[a-zA-Z0-9_-]{11}$/.test(s)) return s;
+      let u;
+      try { u = new URL(s.includes('://') ? s : 'https://' + s); }
+      catch (e) { return null; }
+      const host = u.hostname.replace(/^www\./, '');
+      if (host === 'youtu.be') {
+        const id = u.pathname.slice(1).split('/')[0];
+        return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null;
+      }
+      if (host.endsWith('youtube.com') || host.endsWith('youtube-nocookie.com')) {
+        const v = u.searchParams.get('v');
+        if (v && /^[a-zA-Z0-9_-]{11}$/.test(v)) return v;
+        const m = u.pathname.match(/\/(embed|shorts|live|v)\/([a-zA-Z0-9_-]{11})/);
+        if (m) return m[2];
+      }
+      return null;
+    }
+
+    function loadVideo(id) {
+      const existing = stage.querySelector('iframe');
+      if (existing) existing.remove();
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&modestbranding=1';
+      iframe.title = 'YouTube basketball game';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      // Insert before the overlay so the clock stays on top
+      stage.insertBefore(iframe, overlayClock);
+      placeholder.style.display = 'none';
+    }
+
+    loaderForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      errorEl.textContent = '';
+      const id = extractVideoId(urlInput.value);
+      if (!id) {
+        errorEl.textContent = "Hmm, that doesn't look like a YouTube link. Try a youtube.com/watch?v=… or youtu.be/… URL.";
+        return;
+      }
+      loadVideo(id);
+      urlInput.blur();
+    });
+
+    // ---------- Init ----------
+    reset(time1);
+  </script>
+</body>
+</html>
