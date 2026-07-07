@@ -5,7 +5,7 @@
   <!-- Home / English 24s clock — hreflang cluster with all localized clock pages -->
   <url>
     <loc>https://proshotclock.com/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en"        href="https://proshotclock.com/"/>
@@ -14,13 +14,14 @@
     <xhtml:link rel="alternate" hreflang="fr"        href="https://proshotclock.com/chrono-des-tirs/"/>
     <xhtml:link rel="alternate" hreflang="el"        href="https://proshotclock.com/chronometro-epithesis/"/>
     <xhtml:link rel="alternate" hreflang="tr"        href="https://proshotclock.com/sut-saati/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://proshotclock.com/jingong-shizhong/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://proshotclock.com/"/>
   </url>
 
   <!-- Spanish -->
   <url>
     <loc>https://proshotclock.com/reloj-de-posesion/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en"        href="https://proshotclock.com/"/>
@@ -29,13 +30,14 @@
     <xhtml:link rel="alternate" hreflang="fr"        href="https://proshotclock.com/chrono-des-tirs/"/>
     <xhtml:link rel="alternate" hreflang="el"        href="https://proshotclock.com/chronometro-epithesis/"/>
     <xhtml:link rel="alternate" hreflang="tr"        href="https://proshotclock.com/sut-saati/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://proshotclock.com/jingong-shizhong/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://proshotclock.com/"/>
   </url>
 
   <!-- Italian -->
   <url>
     <loc>https://proshotclock.com/cronometro-24-secondi/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en"        href="https://proshotclock.com/"/>
@@ -44,13 +46,14 @@
     <xhtml:link rel="alternate" hreflang="fr"        href="https://proshotclock.com/chrono-des-tirs/"/>
     <xhtml:link rel="alternate" hreflang="el"        href="https://proshotclock.com/chronometro-epithesis/"/>
     <xhtml:link rel="alternate" hreflang="tr"        href="https://proshotclock.com/sut-saati/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://proshotclock.com/jingong-shizhong/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://proshotclock.com/"/>
   </url>
 
   <!-- French -->
   <url>
     <loc>https://proshotclock.com/chrono-des-tirs/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en"        href="https://proshotclock.com/"/>
@@ -59,13 +62,14 @@
     <xhtml:link rel="alternate" hreflang="fr"        href="https://proshotclock.com/chrono-des-tirs/"/>
     <xhtml:link rel="alternate" hreflang="el"        href="https://proshotclock.com/chronometro-epithesis/"/>
     <xhtml:link rel="alternate" hreflang="tr"        href="https://proshotclock.com/sut-saati/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://proshotclock.com/jingong-shizhong/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://proshotclock.com/"/>
   </url>
 
   <!-- Greek -->
   <url>
     <loc>https://proshotclock.com/chronometro-epithesis/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en"        href="https://proshotclock.com/"/>
@@ -74,13 +78,14 @@
     <xhtml:link rel="alternate" hreflang="fr"        href="https://proshotclock.com/chrono-des-tirs/"/>
     <xhtml:link rel="alternate" hreflang="el"        href="https://proshotclock.com/chronometro-epithesis/"/>
     <xhtml:link rel="alternate" hreflang="tr"        href="https://proshotclock.com/sut-saati/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://proshotclock.com/jingong-shizhong/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://proshotclock.com/"/>
   </url>
 
   <!-- Turkish -->
   <url>
     <loc>https://proshotclock.com/sut-saati/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en"        href="https://proshotclock.com/"/>
@@ -89,13 +94,30 @@
     <xhtml:link rel="alternate" hreflang="fr"        href="https://proshotclock.com/chrono-des-tirs/"/>
     <xhtml:link rel="alternate" hreflang="el"        href="https://proshotclock.com/chronometro-epithesis/"/>
     <xhtml:link rel="alternate" hreflang="tr"        href="https://proshotclock.com/sut-saati/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://proshotclock.com/jingong-shizhong/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://proshotclock.com/"/>
+  </url>
+
+  <!-- Chinese (Simplified) -->
+  <url>
+    <loc>https://proshotclock.com/jingong-shizhong/</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://proshotclock.com/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://proshotclock.com/reloj-de-posesion/"/>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://proshotclock.com/cronometro-24-secondi/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://proshotclock.com/chrono-des-tirs/"/>
+    <xhtml:link rel="alternate" hreflang="el"        href="https://proshotclock.com/chronometro-epithesis/"/>
+    <xhtml:link rel="alternate" hreflang="tr"        href="https://proshotclock.com/sut-saati/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans"   href="https://proshotclock.com/jingong-shizhong/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://proshotclock.com/"/>
   </url>
 
   <!-- YouTube Free Play -->
   <url>
     <loc>https://proshotclock.com/youtube/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -103,19 +125,19 @@
   <!-- Preset landing pages -->
   <url>
     <loc>https://proshotclock.com/30-second-shot-clock/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://proshotclock.com/3x3-shot-clock/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://proshotclock.com/embed/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
