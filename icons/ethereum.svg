@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 417" width="256" height="417" aria-label="Ethereum">
+  <path fill="#343434" d="M127.9 0 125 9.5v275.7l2.9 2.9 127.9-75.6z"/>
+  <path fill="#8C8C8C" d="M127.9 0 0 212.5l127.9 75.6V154.2z"/>
+  <path fill="#3C3C3B" d="m127.9 312.2-1.6 2v98.2l1.6 4.8L256 236.6z"/>
+  <path fill="#8C8C8C" d="M127.9 417.2v-105L0 236.6z"/>
+  <path fill="#141414" d="m127.9 288.1 127.9-75.6-127.9-58.3z"/>
+  <path fill="#393939" d="m0 212.5 127.9 75.6V154.2z"/>
+</svg>

@@ -1,6 +1,6 @@
 # ProShotClock
 
-> ProShotClock is a free online basketball shot clock that runs in any web browser. It supports the 24-second NBA/WNBA/FIBA clock, the 30-second NCAA college clock, the 35-second U.S. high school (NFHS) clock, and the 12-second FIBA 3x3 (3v3) clock, plus 14- and 20-second resets, custom timers, an end-of-clock buzzer, customizable keyboard shortcuts, and an external full-screen display for a second monitor or projector. No download or sign-up required.
+> ProShotClock is a free online basketball shot clock that runs in any web browser, with no download or sign-up. It supports the 24-second NBA/WNBA/FIBA clock, the 30-second NCAA college clock, the 35-second U.S. high school (NFHS) clock, and the 12-second FIBA 3x3 (3v3) clock, plus 14- and 20-second resets, custom timers, an end-of-clock buzzer, customizable keyboard shortcuts, and an external full-screen display for a second monitor or projector. It also offers a "YouTube Free Play" mode for practising shot-clock operation over any basketball video, and is localized into 10 languages.
 
 ## Key facts about basketball shot clocks
 - NBA, WNBA and FIBA: 24-second shot clock; resets to 14 seconds after an offensive rebound (or certain defensive fouls/violations) when the offense keeps possession in the frontcourt.
@@ -11,9 +11,24 @@
 
 ## Pages
 - [Shot clock app and guide](https://proshotclock.com/): the interactive timer plus shot-clock rules, a league comparison table, a how-to, and an FAQ.
-- [Whole-seconds display](https://proshotclock.com/?decimals=off): the main clock with the final-seconds tenths turned off (the former /pieni view, which now redirects here).
+- [Shot clock over YouTube (Free Play)](https://proshotclock.com/youtube/): load any YouTube basketball game and operate a corner-overlay 24-second shot clock over the footage in real time, using the keyboard.
+- [30-second shot clock](https://proshotclock.com/30-second-shot-clock/): NCAA college clock, pre-set to 30 seconds with the 20-second reset.
+- [3x3 shot clock](https://proshotclock.com/3x3-shot-clock/): FIBA 3x3 clock, pre-set to 12 seconds.
+- [Embed the shot clock](https://proshotclock.com/embed/): copy one line of HTML to embed the clock on any website.
+- [Whole-seconds display](https://proshotclock.com/?decimals=off): the main clock with final-seconds tenths turned off.
+
+## Localized versions (same 24-second clock and rules content)
+- Spanish — Reloj de tiro: https://proshotclock.com/reloj-de-posesion/
+- Italian — Cronometro dei 24 secondi: https://proshotclock.com/cronometro-24-secondi/
+- French — Chronomètre des tirs: https://proshotclock.com/chrono-des-tirs/
+- Greek — Χρονόμετρο επίθεσης: https://proshotclock.com/chronometro-epithesis/
+- Turkish — Şut saati: https://proshotclock.com/sut-saati/
+- Chinese (Simplified) — 进攻时钟: https://proshotclock.com/jingong-shizhong/
+- Hebrew — שעון התקפה: https://proshotclock.com/sheon-hatkafa/
+- Arabic — ساعة الهجوم: https://proshotclock.com/saat-alhujoom/
+- Filipino — Shot clock: https://proshotclock.com/orasan-ng-tira/
 
 ## About
 - Author: Niccolò Bevacqua
-- Cost: free
-- Use cases: basketball practice, team drills, scrimmages, pickup games, training, and as a backup game clock.
+- Cost: free (no sign-up, no download)
+- Use cases: basketball practice, team drills, scrimmages, pickup games, referee/table-official training, and as a backup game clock.

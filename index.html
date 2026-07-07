@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Basketball Shot Clock — 24s, 30s, 35s & 12s (3x3) Timer | ProShotClock</title>
-  <meta name="description" content="Free online basketball shot clock with a 24-second NBA/FIBA timer, 30-second NCAA timer, 35-second high school timer, and 12-second FIBA 3x3 (3v3) timer. 14s/20s resets, buzzer, custom times, and keyboard shortcuts for practice and games.">
+  <title>Basketball Shot Clock — 24s, 30s, 35s, 12s | ProShotClock</title>
+  <meta name="description" content="Free online basketball shot clock: 24s NBA/FIBA, 30s NCAA, 35s high-school and 12s 3x3 timers, with 14/20s resets, buzzer and keyboard shortcuts.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="author" content="Niccolò Bevacqua">
   <meta name="theme-color" content="#1a1a1a">
@@ -26,7 +26,16 @@
   <!-- Embed mode (?embed=1): strip page chrome so the clock can be iframed cleanly.
        Set early on <html> to avoid a flash of the full page. -->
   <script>
-    try { if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed'); } catch (e) {}
+    // Embed mode: hide chrome, and strip structured data so the iframed copy
+    // doesn't duplicate the parent page's schema.
+    try {
+      if (new URLSearchParams(location.search).has('embed')) {
+        document.documentElement.classList.add('embed');
+        document.addEventListener('DOMContentLoaded', function () {
+          document.querySelectorAll('script[type="application/ld+json"]').forEach(function (n) { n.remove(); });
+        });
+      }
+    } catch (e) {}
   </script>
 
   <!-- Open Graph -->
@@ -34,18 +43,21 @@
   <meta property="og:title" content="Online Basketball Shot Clock — 24s, 30s, 35s & 12s (3x3) Timer">
   <meta property="og:description" content="Free basketball shot clock for practice and games. NBA/FIBA 24s, NCAA 30s, high school 35s, and FIBA 3x3 12s timers with resets, buzzer, custom times, and keyboard shortcuts.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://i.ibb.co/RHPDGYy/24-2-1.png">
+  <meta property="og:image" content="https://proshotclock.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="ProShotClock — free online basketball shot clock">
   <meta property="og:url" content="https://proshotclock.com/">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Online Basketball Shot Clock — ProShotClock">
   <meta name="twitter:description" content="Free basketball shot clock: NBA/FIBA 24s, NCAA 30s, high school 35s, FIBA 3x3 12s. Resets, buzzer, custom times, keyboard shortcuts.">
-  <meta name="twitter:image" content="https://i.ibb.co/RHPDGYy/24-2-1.png">
+  <meta name="twitter:image" content="https://proshotclock.com/og-image.png">
 
-  <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/RHPDGYy/24-2-1.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/RHPDGYy/24-2-1.png">
-  <link rel="apple-touch-icon" href="https://i.ibb.co/RHPDGYy/24-2-1.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <!-- Structured data: WebSite (controls the site name shown in Google results) -->
   <script type="application/ld+json">
@@ -55,6 +67,21 @@
     "name": "ProShotClock",
     "alternateName": "Pro Shot Clock",
     "url": "https://proshotclock.com/"
+  }
+  </script>
+
+  <!-- Structured data: Organization (brand entity + logo) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ProShotClock",
+    "url": "https://proshotclock.com/",
+    "logo": "https://proshotclock.com/icon-512.png",
+    "sameAs": [
+      "https://buymeacoffee.com/niccolobevacqua",
+      "https://www.paypal.com/paypalme/niccolobevacqua"
+    ]
   }
   </script>
 
@@ -169,13 +196,19 @@
   }
   </script>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S9JGHKFKBG"></script>
+  <!-- Google tag (gtag.js) — skipped in embed mode so iframed copies don't double-count -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-S9JGHKFKBG');
+    (function () {
+      try { if (new URLSearchParams(location.search).has('embed')) return; } catch (e) {}
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-S9JGHKFKBG';
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-S9JGHKFKBG');
+    })();
   </script>
 
   <style>
@@ -688,11 +721,11 @@
     <p style="padding: 5px;">Professional Shot Clock is a free app, if you enjoy it please consider making a donation! :)</p>
     <div style="height: 20px;"></div>
     <a href="https://buymeacoffee.com/niccolobevacqua" target="_blank">
-      <img src="https://play-lh.googleusercontent.com/aMb_Qiolzkq8OxtQZ3Af2j8Zsp-ZZcNetR9O4xSjxH94gMA5c5gpRVbpg-3f_0L7vlo" alt="Buymeacoffee">
+      <img src="/icons/buymeacoffee.png" alt="Buymeacoffee">
       Buy me a coffee
     </a>
     <a href="#" class="sidebar-link" onclick="copyAddress('0x63abE9dc7C5800550C6e0ab5fD74dC2b7AC4b21f'); return false;">
-      <img src="https://cdnlogo.com/logos/e/81/ethereum-eth.svg" alt="Ethereum Address">
+      <img src="/icons/ethereum.svg" alt="Ethereum Address">
       Ethereum Address
     </a>
 
@@ -703,15 +736,15 @@
     }
     </script>
     <a href="https://www.paypal.com/paypalme/niccolobevacqua" target="_blank">
-      <img src="https://play-lh.googleusercontent.com/xOKbvDt362x1uzW-nnggP-PgO9HM4L1vwBl5HgHFHy_n1X3mqeBtOSoIyNJzTS3rrj70" alt="Paypal">
+      <img src="/icons/paypal.png" alt="Paypal">
       Paypal
     </a>
     <a href="mailto:niccolo.bevacqua@gmail.com">
-      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email Icon">
+      <img src="/icons/email.png" alt="Email Icon">
       Send me an email!
     </a>
     <a href="https://proshotclock.com/pieni" >
-      <img src="https://i.ibb.co/RHPDGYy/24-2-1.png" alt="Proshotclock">
+      <img src="/favicon-32.png" alt="Proshotclock">
       Toggle 24 seconds Empty - Full
     </a>
     <a href="https://cruciverbaitalia.com" target="_blank" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap;">
@@ -941,7 +974,11 @@
     <footer>
       ProShotClock — a free basketball shot clock by Niccolò Bevacqua.
       <a href="#">Back to the clock ▴</a>
-    </footer>
+      <nav class="site-nav" aria-label="Languages and other shot clocks" style="max-width:860px;margin:1.5rem auto 0;padding:1.1rem 1.2rem;border-top:1px solid #333;font-size:0.82rem;line-height:2.1;text-align:center;">
+    <div style="color:#8a8a93;"><a href="/" hreflang="en" lang="en">English</a> · <a href="/reloj-de-posesion/" hreflang="es" lang="es">Español</a> · <a href="/cronometro-24-secondi/" hreflang="it" lang="it">Italiano</a> · <a href="/chrono-des-tirs/" hreflang="fr" lang="fr">Français</a> · <a href="/chronometro-epithesis/" hreflang="el" lang="el">Ελληνικά</a> · <a href="/sut-saati/" hreflang="tr" lang="tr">Türkçe</a> · <a href="/jingong-shizhong/" hreflang="zh-Hans" lang="zh-Hans">中文</a> · <a href="/sheon-hatkafa/" hreflang="he" lang="he" dir="rtl">עברית</a> · <a href="/saat-alhujoom/" hreflang="ar" lang="ar" dir="rtl">العربية</a> · <a href="/orasan-ng-tira/" hreflang="fil" lang="fil">Filipino</a></div>
+    <div style="margin-top:0.5rem;color:#8a8a93;"><a href="/youtube/">Shot clock over YouTube</a> · <a href="/30-second-shot-clock/">30-second (NCAA)</a> · <a href="/3x3-shot-clock/">3x3 (12s)</a> · <a href="/embed/">Embed widget</a></div>
+  </nav>
+  </footer>
   </main>
 
   <!-- Settings modal -->
