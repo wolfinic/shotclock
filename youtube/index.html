@@ -375,10 +375,13 @@
     // ---------- Clock state (ported from the main ProShotClock app) ----------
     let time1 = 24, time2 = 14;          // reset presets
     let showDecimals = true;
-    let value = time1;
+    // Deadline-based, like the main app: time left comes from performance.now(),
+    // so late or throttled timers never slow the clock down.
+    let value = time1;                 // displayed value, in whole tenths
+    let remainingMs = time1 * 1000;    // exact time left while stopped
+    let deadline = 0;                  // performance.now() at zero, while running
     let running = false;
     let interval = null;
-    let hasBuzzed = false;
     let blank = false;
     let lastReset = time1;
 
@@ -396,33 +399,56 @@
       else if (value <= 10) overlayClock.classList.add('warning');
     }
 
+    // iOS Safari only lets a timer start audio once that element has been played
+    // inside a user gesture, so the buzzer is primed (muted) on the first Start.
+    let buzzerPrimed = false;
+    function primeBuzzer() {
+      if (buzzerPrimed) return;
+      buzzerPrimed = true;
+      sirenSound.muted = true;
+      sirenSound.play().then(() => {
+        // Still muted means the real buzzer hasn't taken over in the meantime.
+        if (sirenSound.muted) { sirenSound.pause(); sirenSound.currentTime = 0; sirenSound.muted = false; }
+      }).catch(() => { sirenSound.muted = false; buzzerPrimed = false; });
+    }
+
     function playBuzzer() {
+      sirenSound.muted = false;
       sirenSound.currentTime = 0;
       sirenSound.play().catch(() => {});
     }
 
+    function toTenths(ms) {
+      return Math.ceil(ms / 100) / 10;
+    }
+
     function tick() {
+      const ms = Math.max(0, deadline - performance.now());
+      const v = toTenths(ms);
+      if (v === value) return;
+      value = v;
       renderText();
-      if (value <= 0) {
-        value = 0;
-        if (!blank) overlayClock.textContent = showDecimals ? '0.0' : '0';
-        if (!hasBuzzed) { playBuzzer(); hasBuzzed = true; stop(); }
-      } else {
-        value = Math.round((value - 0.1) * 10) / 10;
-        hasBuzzed = false;
-      }
       renderColor();
+      if (ms <= 0) { stop(); playBuzzer(); }
     }
 
     function start() {
       if (!running && value > 0) {
+        primeBuzzer();
         running = true;
         blank = false;
-        interval = setInterval(tick, 100);
+        deadline = performance.now() + remainingMs;
+        interval = setInterval(tick, 20);
         renderColor();
       }
     }
     function stop() {
+      if (running) {
+        remainingMs = Math.max(0, deadline - performance.now());
+        value = toTenths(remainingMs);
+        renderText();
+        renderColor();
+      }
       running = false;
       clearInterval(interval);
     }
@@ -431,8 +457,8 @@
     function reset(v) {
       stop();
       value = v;
+      remainingMs = v * 1000;
       lastReset = v;
-      hasBuzzed = false;
       blank = false;
       renderText();
       renderColor();
@@ -441,7 +467,7 @@
     function toggleBlank() {
       if (!running) {
         blank = !blank;
-        if (!blank) value = lastReset;
+        if (!blank) { value = lastReset; remainingMs = lastReset * 1000; }
         renderText();
         renderColor();
       }

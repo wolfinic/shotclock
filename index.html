@@ -1086,8 +1086,12 @@
     })();
 
     // ---------- Cross-window sync (external display) ----------
-    const channel = ('BroadcastChannel' in window) ? new BroadcastChannel('proshotclock') : null;
+    // Embedded copies (?embed) never drive the external display: an iframed clock on
+    // a landing page would otherwise overwrite the operator's console state.
+    const isEmbed = document.documentElement.classList.contains('embed');
+    const channel = (!isEmbed && 'BroadcastChannel' in window) ? new BroadcastChannel('proshotclock') : null;
     function broadcast() {
+      if (isEmbed) return;
       const payload = {
         time: shotClockValue,
         running: isRunning,
@@ -1102,10 +1106,14 @@
     }
 
     // ---------- Clock state ----------
+    // Timing is deadline-based: the time left is derived from performance.now() on
+    // every tick, so late or throttled timers (hidden tab, busy main thread) can
+    // delay a repaint but never slow the clock down.
     let shotClockInterval;
-    let shotClockValue = settings.time1;
+    let shotClockValue = settings.time1;     // displayed value, in whole tenths
+    let remainingMs = settings.time1 * 1000; // exact time left while stopped
+    let deadline = 0;                        // performance.now() at zero, while running
     let isRunning = false;
-    let hasPlayedSiren = false;
     let isDisplayBlank = false;
     let lastResetValue = settings.time1;
     let previousValue = settings.time1;   // for Recall
@@ -1131,34 +1139,51 @@
       else shotClockElement.textContent = Math.ceil(t);
     }
 
+    function toTenths(ms) {
+      return Math.ceil(ms / 100) / 10;
+    }
+
     function updateShotClock() {
+      const ms = Math.max(0, deadline - performance.now());
+      const value = toTenths(ms);
+      if (value === shotClockValue) return;
+      shotClockValue = value;
       renderClockText();
-      if (shotClockValue <= 0) {
-        shotClockValue = 0;
-        if (!isDisplayBlank) shotClockElement.textContent = settings.showDecimals ? '0.0' : '0';
-        if (!hasPlayedSiren) {
-          if (!settings.muteConsole) playSirenSound();
-          hasPlayedSiren = true;
-          stopShotClock();
-        }
-      } else {
-        shotClockValue = Math.round((shotClockValue - 0.1) * 10) / 10;
-        hasPlayedSiren = false;
+      if (ms <= 0) {
+        stopShotClock();
+        if (!settings.muteConsole) playSirenSound();
+        return;
       }
       updateClockDisplay();
       broadcast();
     }
 
+    // iOS Safari only lets a timer start audio once that element has been played
+    // inside a user gesture, so the siren is primed (muted) on the first Start.
+    let sirenPrimed = false;
+    function primeSiren() {
+      if (sirenPrimed) return;
+      sirenPrimed = true;
+      sirenSound.muted = true;
+      sirenSound.play().then(() => {
+        // Still muted means the real buzzer hasn't taken over in the meantime.
+        if (sirenSound.muted) { sirenSound.pause(); sirenSound.currentTime = 0; sirenSound.muted = false; }
+      }).catch(() => { sirenSound.muted = false; sirenPrimed = false; });
+    }
+
     function playSirenSound() {
+      sirenSound.muted = false;
       sirenSound.currentTime = 0;
       sirenSound.play().catch(error => console.log('Audio playback failed:', error));
     }
 
     function startShotClock() {
       if (!isRunning && shotClockValue > 0) {
+        primeSiren();
         isRunning = true;
         isDisplayBlank = false;
-        shotClockInterval = setInterval(updateShotClock, 100);
+        deadline = performance.now() + remainingMs;
+        shotClockInterval = setInterval(updateShotClock, 20);
         updateStatus();
         updateClockDisplay();
         broadcast();
@@ -1166,6 +1191,11 @@
     }
 
     function stopShotClock() {
+      if (isRunning) {
+        remainingMs = Math.max(0, deadline - performance.now());
+        shotClockValue = toTenths(remainingMs);
+        renderClockText();
+      }
       isRunning = false;
       clearInterval(shotClockInterval);
       updateStatus();
@@ -1178,8 +1208,8 @@
       stopShotClock();
       previousValue = lastResetValue;
       shotClockValue = value;
+      remainingMs = value * 1000;
       lastResetValue = value;
-      hasPlayedSiren = false;
       isDisplayBlank = false;
       renderClockText();
       updateClockDisplay();
@@ -1205,7 +1235,7 @@
     function toggleDisplay() {
       if (!isRunning && lastResetValue === settings.time1) {
         isDisplayBlank = !isDisplayBlank;
-        if (!isDisplayBlank) shotClockValue = lastResetValue;
+        if (!isDisplayBlank) { shotClockValue = lastResetValue; remainingMs = lastResetValue * 1000; }
         renderClockText();
         updateClockDisplay();
         broadcast();
@@ -1358,6 +1388,8 @@
         .then(r => r.ok ? r.json() : null)
         .then(s => {
           if (!s || !s.active || !s.linkUrl) return;
+          // `until` is the last day the banner runs (inclusive, viewer's local time).
+          if (s.until && new Date() > new Date(s.until + 'T23:59:59')) return;
           const active = document.getElementById('sponsor-active');
           const empty  = document.getElementById('sponsor-empty');
           const img    = document.getElementById('sponsor-img');

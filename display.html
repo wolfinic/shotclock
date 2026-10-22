@@ -255,6 +255,8 @@
       .then(r => r.ok ? r.json() : null)
       .then(s => {
         if (!s || !s.active || !s.linkUrl) return;
+        // `until` is the last day the strip runs (inclusive, viewer's local time).
+        if (s.until && new Date() > new Date(s.until + 'T23:59:59')) return;
         const strip = document.getElementById('sponsor-strip');
         const img   = document.getElementById('sponsor-strip-img');
         const name  = document.getElementById('sponsor-strip-name');
